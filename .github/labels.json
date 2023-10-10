@@ -1,0 +1,82 @@
+[
+  {
+    "name": "⭐ [FEAT]",
+    "color": "abdee6",
+    "description": "새로운 기능 구현"
+  },
+  {
+    "name": "✅ [MOD]",
+    "color": "cbaacb",
+    "description": "코드 수정 및 내부 파일 수정"
+  },
+  {
+    "name": "➕ [ADD]",
+    "color": "FFCCB6",
+    "description": "부수적인 코드 추가 및 라이브러리 추가, 새로운 파일 생성"
+  },
+  {
+    "name": "🛠️ [CHORE]",
+    "color": "F3B0C3",
+    "description": "버전 코드 수정, 패키지 구조 변경, 타입 및 변수명 변경 등의 작은 작업"
+  },
+  {
+    "name": "🚫 [DEL]",
+    "color": "C6DBDA",
+    "description": "쓸모없는 코드나 파일 삭제"
+  },
+  {
+    "name": "💟 [UI]",
+    "color": "FEE1E8",
+    "description": "UI 작업 xml 파일 건들면 요거"
+  },
+  {
+    "name": "📃 [DOCS]",
+    "color": "FED7C3",
+    "description": "문서 작성 및 수정 (README.md 등)"
+  },
+  {
+    "name": "🔨 [FIX]",
+    "color": "FF968A",
+    "description": "버그 및 오류 발생 및 해결"
+  },
+  {
+    "name": "🚑️ [HOTFIX]",
+    "color": "FFC8A2",
+    "description": "이슈나 QA에서 발생된 급하게 해결해야 될 문제"
+  },
+  {
+    "name": " ♻️ [REFACTOR]",
+    "color": "D4F0F0",
+    "description": "코드 리팩토링"
+  },
+  {
+    "name": "🚚 [MOVE]",
+    "color": "8FCACA",
+    "description": "파일 이동 or 코드 이동"
+  },
+  {
+    "name": "⏪️ [RENAME]",
+    "color": "CCE2CB",
+    "description": "파일 이름 변경"
+  },
+  {
+    "name": "서재원",
+    "color": "FFFFB5",
+    "description": "서재원이 했다"
+  },
+  {
+    "name": "📕 필수 과제",
+    "color": "FFDBCC",
+    "description": "필수 과제"
+  },
+  {
+    "name": "📗 심화 과제",
+    "color": "FFDBCC",
+    "description": "심화 과제"
+  },
+  {
+    "name": "📙 도전 과제",
+    "color": "FFDBCC",
+    "description": "도전 과제"
+  }
+]
