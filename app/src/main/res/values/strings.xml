@@ -11,4 +11,11 @@
     <string name="signup_hobby">HOBBY</string>
     <string name="signup_hobby_hint">취미를 입력하세요</string>
     <string name="signup_do_signup">회원가입 하기</string>
+    <string name="login_title">Welcome to DO SOPT!</string>
+    <string name="login_id">ID</string>
+    <string name="login_id_hint">id를 입력하세요</string>
+    <string name="login_pw">PW</string>
+    <string name="login_pw_hint">pw를 입력하세요</string>
+    <string name="login_button_signin">로그인</string>
+    <string name="login_button_signup">회원가입</string>
 </resources>

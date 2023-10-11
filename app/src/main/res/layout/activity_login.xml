@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:contentDescription="login title"
-        android:text="Welcome to GoSopt!"
+        android:text="@string/login_title"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="ID"
+        android:text="@string/login_id"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login_title" />
@@ -41,7 +41,7 @@
             android:id="@+id/et_login_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="id를 입력하세요" />
+            android:hint="@string/login_id_hint" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="PW"
+        android:text="@string/login_pw"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/il_login_id" />
@@ -68,7 +68,7 @@
             android:id="@+id/et_login_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="pw를 입력하세요"
+            android:hint="@string/login_pw_hint"
             android:inputType="text|textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="로그인"
+        android:text="@string/login_button_signin"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/il_login_pw" />
 
@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="회원가입"
+        android:text="@string/login_button_signup"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/btn_login_signin" />
 
