@@ -18,4 +18,6 @@
     <string name="login_pw_hint">pw를 입력하세요</string>
     <string name="login_button_signin">로그인</string>
     <string name="login_button_signup">회원가입</string>
+    <string name="main_name">서재원</string>
+    <string name="main_comment">안녕하세요 반갑습니다 서재원입니다.</string>
 </resources>
