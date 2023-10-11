@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">DoSoptTemplate</string>
+    <string name="app_name">DO SOPT by librarywon</string>
+    <!-- signup -->
+    <string name="signup_title">SIGN UP</string>
+    <string name="signup_id">ID</string>
+    <string name="signup_id_hint">id를 입력하세요</string>
+    <string name="signup_pw">PW</string>
+    <string name="signup_hint">pw를 입력하세요</string>
+    <string name="signup_nickname">NICKNAME</string>
+    <string name="signup_nickname_hint">닉네임을 입력하세요</string>
+    <string name="signup_hobby">HOBBY</string>
+    <string name="signup_hobby_hint">취미를 입력하세요</string>
+    <string name="signup_do_signup">회원가입 하기</string>
 </resources>
