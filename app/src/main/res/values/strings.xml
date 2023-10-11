@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">DO SOPT by librarywon</string>
+
     <!-- signup -->
     <string name="signup_title">SIGN UP</string>
     <string name="signup_id">ID</string>
@@ -11,6 +12,8 @@
     <string name="signup_hobby">HOBBY</string>
     <string name="signup_hobby_hint">취미를 입력하세요</string>
     <string name="signup_do_signup">회원가입 하기</string>
+
+    <!-- login -->
     <string name="login_title">Welcome to DO SOPT!</string>
     <string name="login_id">ID</string>
     <string name="login_id_hint">id를 입력하세요</string>
@@ -18,6 +21,8 @@
     <string name="login_pw_hint">pw를 입력하세요</string>
     <string name="login_button_signin">로그인</string>
     <string name="login_button_signup">회원가입</string>
+
+    <!-- main -->
     <string name="main_name">서재원</string>
     <string name="main_comment">안녕하세요 반갑습니다 서재원입니다.</string>
 </resources>
