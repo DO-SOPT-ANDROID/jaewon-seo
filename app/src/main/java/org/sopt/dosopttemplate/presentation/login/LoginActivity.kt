@@ -34,12 +34,14 @@ class LoginActivity : AppCompatActivity() {
         setOnClickListener()
     }
 
+    // LoginActivity
     private fun setOnClickListener() {
         with(binding) {
             btnLoginSignin.setOnClickListener {
                 if (loginValid()) {
                     toast("로그인 성공")
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    intent.putExtra("user_data", viewModel.userInfo.value)
                     startActivity(intent)
                     finish()
                 } else {
