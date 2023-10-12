@@ -49,22 +49,20 @@
         android:id="@+id/tv_main_id_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:text="ID"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_main_profile"
         app:layout_constraintTop_toBottomOf="@id/iv_main_profile" />
 
     <TextView
         android:id="@+id/tv_main_id_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_main_profile"
         app:layout_constraintTop_toBottomOf="@id/tv_main_id_title"
         tools:text="librarywon" />
 
@@ -72,22 +70,20 @@
         android:id="@+id/tv_main_hobby_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:text="취미"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_main_profile"
         app:layout_constraintTop_toBottomOf="@id/tv_main_id_value" />
 
     <TextView
         android:id="@+id/tv_main_hobby_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_main_profile"
         app:layout_constraintTop_toBottomOf="@id/tv_main_hobby_title"
         tools:text="잠자기" />
 
