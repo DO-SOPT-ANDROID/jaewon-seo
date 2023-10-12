@@ -31,7 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-    viewBinding{
+    viewBinding {
         enabled = true
     }
 }
@@ -48,4 +48,6 @@ dependencies {
 
     // Coil
     implementation("io.coil-kt:coil:1.4.0")
+    // activity-ktx
+    implementation "androidx.activity:activity-ktx:1.4.0"
 }

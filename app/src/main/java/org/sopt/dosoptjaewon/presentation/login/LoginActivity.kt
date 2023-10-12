@@ -3,6 +3,7 @@ package org.sopt.dosoptjaewon.presentation.login
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.ActivityLoginBinding
@@ -14,7 +15,7 @@ import org.sopt.dosoptjaewon.util.toast
 class LoginActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
-    private val viewModel = LoginViewModel()
+    private val viewModel: LoginViewModel by viewModels()
     private val signupResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
