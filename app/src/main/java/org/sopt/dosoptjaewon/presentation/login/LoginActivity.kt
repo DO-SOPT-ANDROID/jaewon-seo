@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    snackbar("아이디 혹은 비밀번호를 다시 확인해주세요.")
+                    binding.root.snackbar("아이디 혹은 비밀번호를 다시 확인해주세요.")
                 }
             }
             btnLoginSignup.setOnClickListener {

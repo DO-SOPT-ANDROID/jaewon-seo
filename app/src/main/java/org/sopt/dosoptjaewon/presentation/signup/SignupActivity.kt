@@ -35,7 +35,7 @@ class SignupActivity : AppCompatActivity() {
                     toast("회원가입 완료")
                     intentActivity(user)
                 } else {
-                    snackbar("회원가입 형식과 맞지 않습니다.")
+                    binding.root.snackbar("회원가입 형식과 맞지 않습니다.")
                 }
             }
         }
