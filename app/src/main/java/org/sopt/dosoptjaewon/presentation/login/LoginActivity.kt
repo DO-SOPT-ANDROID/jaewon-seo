@@ -31,29 +31,33 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setOnClickListener()
+        initListeners()
     }
 
-    // LoginActivity
-    private fun setOnClickListener() {
+    private fun initListeners() {
         with(binding) {
-            btnLoginSignin.setOnClickListener {
-                if (loginValid()) {
-                    toast("로그인 성공")
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    intent.putExtra(EXTRA_DATA, viewModel.userInfo.value)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    binding.root.snackbar("아이디 혹은 비밀번호를 다시 확인해주세요.")
-                }
-            }
-            btnLoginSignup.setOnClickListener {
-                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
-                signupResultLauncher.launch(intent)
-            }
+            btnLoginSignin.setOnClickListener { handleLoginClick() }
+            btnLoginSignup.setOnClickListener { handleSignupClick() }
         }
     }
+
+    private fun handleLoginClick() {
+        if (loginValid()) {
+            toast("로그인 성공")
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            intent.putExtra(EXTRA_DATA, viewModel.userInfo.value)
+            startActivity(intent)
+            finish()
+        } else {
+            binding.root.snackbar("아이디 혹은 비밀번호를 다시 확인해주세요.")
+        }
+    }
+
+    private fun handleSignupClick() {
+        val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+        signupResultLauncher.launch(intent)
+    }
+
 
     private fun loginValid(): Boolean {
         val id = viewModel.userInfo.value?.id
