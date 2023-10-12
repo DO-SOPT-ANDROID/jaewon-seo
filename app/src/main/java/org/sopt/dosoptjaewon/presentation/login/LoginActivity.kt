@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
     private val signupResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                val user: User? = it.data?.getParcelableExtra("user_data")
+                val user: User? = it.data?.getParcelableExtra(EXTRA_DATA)
                 if (user != null) {
                     // 로그인화면에 아이디는 자동으로 작성되게
                     binding.etLoginId.setText(user.id)
@@ -45,10 +45,11 @@ class LoginActivity : AppCompatActivity() {
     private fun handleLoginClick() {
         if (loginValid()) {
             toast("로그인 성공")
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            intent.putExtra(EXTRA_DATA, viewModel.userInfo.value)
-            startActivity(intent)
-            finish()
+            Intent(this@LoginActivity, MainActivity::class.java).apply {
+                putExtra("user_data", viewModel.userInfo.value)
+                startActivity(this)
+                finish()
+            }
         } else {
             binding.root.snackbar("아이디 혹은 비밀번호를 다시 확인해주세요.")
         }
