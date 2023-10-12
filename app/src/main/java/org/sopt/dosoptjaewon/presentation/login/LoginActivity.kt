@@ -1,15 +1,15 @@
-package org.sopt.dosopttemplate.presentation.login
+package org.sopt.dosoptjaewon.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import org.sopt.dosopttemplate.data.model.User
-import org.sopt.dosopttemplate.databinding.ActivityLoginBinding
-import org.sopt.dosopttemplate.presentation.main.MainActivity
-import org.sopt.dosopttemplate.presentation.signup.SignupActivity
-import org.sopt.dosopttemplate.util.snackbar
-import org.sopt.dosopttemplate.util.toast
+import org.sopt.dosoptjaewon.data.model.User
+import org.sopt.dosoptjaewon.databinding.ActivityLoginBinding
+import org.sopt.dosoptjaewon.presentation.main.MainActivity
+import org.sopt.dosoptjaewon.presentation.signup.SignupActivity
+import org.sopt.dosoptjaewon.util.snackbar
+import org.sopt.dosoptjaewon.util.toast
 
 class LoginActivity : AppCompatActivity() {
 
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
                 if (loginValid()) {
                     toast("로그인 성공")
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    intent.putExtra("user_data", viewModel.userInfo.value)
+                    intent.putExtra(EXTRA_DATA, viewModel.userInfo.value)
                     startActivity(intent)
                     finish()
                 } else {
@@ -60,5 +60,9 @@ class LoginActivity : AppCompatActivity() {
         val pw = viewModel.userInfo.value?.pw
 
         return binding.etLoginId.text.toString() == id && binding.etLoginPw.text.toString() == pw
+    }
+
+    companion object {
+        const val EXTRA_DATA = "user_data"
     }
 }

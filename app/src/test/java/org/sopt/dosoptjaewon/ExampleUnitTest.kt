@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate
+package org.sopt.dosoptjaewon
 
 import org.junit.Test
 

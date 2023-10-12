@@ -1,9 +1,9 @@
-package org.sopt.dosopttemplate.presentation.main
+package org.sopt.dosoptjaewon.presentation.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.sopt.dosopttemplate.data.model.User
+import org.sopt.dosoptjaewon.data.model.User
 
 class MainViewModel : ViewModel() {
     // 로그인 정보를 담은 User 객체를 LiveData로 관리

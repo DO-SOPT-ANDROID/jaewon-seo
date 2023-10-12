@@ -1,4 +1,4 @@
-package org.sopt.dosopttemplate.data.model
+package org.sopt.dosoptjaewon.data.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

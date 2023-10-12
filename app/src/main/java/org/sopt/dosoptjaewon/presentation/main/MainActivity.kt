@@ -1,11 +1,11 @@
-package org.sopt.dosopttemplate.presentation.main
+package org.sopt.dosoptjaewon.presentation.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
-import org.sopt.dosopttemplate.R
-import org.sopt.dosopttemplate.data.model.User
-import org.sopt.dosopttemplate.databinding.ActivityMainBinding
+import org.sopt.dosoptjaewon.R
+import org.sopt.dosoptjaewon.data.model.User
+import org.sopt.dosoptjaewon.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getUserInfo() {
-        val user: User? = intent.getParcelableExtra("user_data") // User 객체 받기
+        val user: User? = intent.getParcelableExtra(EXTRA_DATA) // User 객체 받기
         if (user != null) {
             viewModel.setUserInfo(user) // ViewModel에 User 객체 적용
         }
@@ -32,5 +32,9 @@ class MainActivity : AppCompatActivity() {
             tvMainIdValue.text = viewModel.userInfo.value?.id
             tvMainHobbyValue.text = viewModel.userInfo.value?.hobby
         }
+    }
+
+    companion object {
+        const val EXTRA_DATA = "user_data"
     }
 }

@@ -1,13 +1,13 @@
-package org.sopt.dosopttemplate.presentation.signup
+package org.sopt.dosoptjaewon.presentation.signup
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import org.sopt.dosopttemplate.data.model.User
-import org.sopt.dosopttemplate.databinding.ActivitySignupBinding
-import org.sopt.dosopttemplate.presentation.login.LoginActivity
-import org.sopt.dosopttemplate.util.snackbar
-import org.sopt.dosopttemplate.util.toast
+import org.sopt.dosoptjaewon.data.model.User
+import org.sopt.dosoptjaewon.databinding.ActivitySignupBinding
+import org.sopt.dosoptjaewon.presentation.login.LoginActivity
+import org.sopt.dosoptjaewon.util.snackbar
+import org.sopt.dosoptjaewon.util.toast
 
 class SignupActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignupBinding.inflate(layoutInflater) }
