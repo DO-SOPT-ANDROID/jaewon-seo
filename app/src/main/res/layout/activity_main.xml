@@ -6,16 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.MainActivity">
 
+
+    <TextView
+        android:id="@+id/tv_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:contentDescription="login title"
+        android:text="@string/main_title"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_main_logout"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:padding="1dp"
+        android:text="@string/main_logout"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_main_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_main_title" />
+
     <ImageView
         android:id="@+id/iv_main_profile"
         android:layout_width="80dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/ic_profile"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_main_title"
         tools:src="@drawable/ic_profile" />
 
     <TextView

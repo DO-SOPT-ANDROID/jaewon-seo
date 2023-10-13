@@ -12,8 +12,8 @@
     <string name="signup_hobby">HOBBY</string>
     <string name="signup_hobby_hint">취미를 입력하세요</string>
     <string name="signup_do_signup">회원가입 하기</string>
-    <string name="signup_signup_fail">회원가입에 실패했습니다.</string>
-    <string name="signup_signup_success">회원가입에 성공했습니다.</string>
+    <string name="signup_fail">회원가입에 실패했습니다.</string>
+    <string name="signup_success">회원가입에 성공했습니다.</string>
 
     <!-- login -->
     <string name="login_title">Welcome to DO SOPT!</string>
@@ -23,8 +23,15 @@
     <string name="login_pw_hint">pw를 입력하세요</string>
     <string name="login_button_signin">로그인</string>
     <string name="login_button_signup">회원가입</string>
+    <string name="login_fail">로그인에 실패했습니다.</string>
+    <string name="login_success">로그인에 성공했습니다.</string>
 
     <!-- main -->
     <string name="main_name">서재원</string>
     <string name="main_comment">안녕하세요 반갑습니다 서재원입니다.</string>
+    <string name="main_title">DO SOPT</string>
+    <string name="main_logout">로그아웃</string>
+    <string name="main_back_press">"뒤로 가기 버튼을 한 번 더 누르면 앱이 종료됩니다."</string>
+    <string name="main_load_info_sucess">"유저 정보를 가져오는데 성공하였습니다."</string>
+    <string name="main_load_info_fail">"유저 정보를 가져오는데 실패하였습니다."</string>
 </resources>
