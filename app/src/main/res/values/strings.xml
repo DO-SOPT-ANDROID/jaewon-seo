@@ -12,6 +12,8 @@
     <string name="signup_hobby">HOBBY</string>
     <string name="signup_hobby_hint">취미를 입력하세요</string>
     <string name="signup_do_signup">회원가입 하기</string>
+    <string name="signup_signup_fail">회원가입에 실패했습니다.</string>
+    <string name="signup_signup_success">회원가입에 성공했습니다.</string>
 
     <!-- login -->
     <string name="login_title">Welcome to DO SOPT!</string>

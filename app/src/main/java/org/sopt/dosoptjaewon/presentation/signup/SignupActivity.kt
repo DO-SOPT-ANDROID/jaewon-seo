@@ -6,8 +6,10 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.common.context.hideKeyboard
+import com.sopt.common.context.stringOf
 import com.sopt.common.context.toast
 import com.sopt.common.view.snackBar
+import org.sopt.dosoptjaewon.R.string
 import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.ActivitySignupBinding
 import org.sopt.dosoptjaewon.presentation.login.LoginActivity
@@ -38,10 +40,10 @@ class SignupActivity : AppCompatActivity() {
 
         // 회원가입 형식이 맞으면 로그인 액티비티로 이동
         if (signupValid(user)) {
-            toast("회원가입 완료")
+            toast(stringOf(string.signup_signup_success))
             intentActivity(user)
         } else {
-            binding.root.snackBar("회원가입 형식과 맞지 않습니다.")
+            binding.root.snackBar(stringOf(string.signup_signup_fail))
         }
     }
 
