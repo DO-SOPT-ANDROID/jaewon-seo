@@ -13,4 +13,8 @@ class LoginViewModel : ViewModel() {
     fun setUserInfo(user: User) {
         _userInfo.value = user
     }
+
+    fun loginValid(id: String, pw: String): Boolean {
+        return userInfo.value?.id == id && userInfo.value?.pw == pw
+    }
 }

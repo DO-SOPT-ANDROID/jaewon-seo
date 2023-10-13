@@ -69,17 +69,24 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleLoginClick() {
-        if (loginValid()) {
+        val id = binding.etLoginId.text.toString()
+        val pw = binding.etLoginPw.text.toString()
+
+        if (viewModel.loginValid(id,pw)) {
             binding.root.snackBar(getString(R.string.login_success))
-            Intent(this@LoginActivity, MainActivity::class.java).apply {
-                putExtra(EXTRA_DATA, viewModel.userInfo.value)
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                saveUserPreference() // 사용자 정보 저장
-                startActivity(this)
-                finish()
-            }
+            navigateToMain()
         } else {
             binding.root.snackBar(getString(R.string.login_fail))
+        }
+    }
+
+    private fun navigateToMain() {
+        Intent(this@LoginActivity, MainActivity::class.java).apply {
+            putExtra(EXTRA_DATA, viewModel.userInfo.value)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            saveUserPreference() // 사용자 정보 저장
+            startActivity(this)
+            finish()
         }
     }
 
@@ -103,11 +110,7 @@ class LoginActivity : AppCompatActivity() {
         signupResultLauncher.launch(intent)
     }
 
-    private fun loginValid(): Boolean {
-        val id = viewModel.userInfo.value?.id
-        val pw = viewModel.userInfo.value?.pw
-        return binding.etLoginId.text.toString() == id && binding.etLoginPw.text.toString() == pw
-    }
+
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         hideKeyboard(currentFocus ?: View(this))
