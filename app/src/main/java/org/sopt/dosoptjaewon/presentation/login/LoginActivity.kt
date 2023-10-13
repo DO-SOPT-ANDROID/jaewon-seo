@@ -1,6 +1,7 @@
 package org.sopt.dosoptjaewon.presentation.login
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -8,8 +9,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.common.context.hideKeyboard
-import com.sopt.common.context.toast
 import com.sopt.common.view.snackBar
+import org.sopt.dosoptjaewon.R
 import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.ActivityLoginBinding
 import org.sopt.dosoptjaewon.presentation.main.MainActivity
@@ -38,6 +39,11 @@ class LoginActivity : AppCompatActivity() {
         initView()
     }
 
+    override fun onStart() {
+        super.onStart()
+        checkAutoLogin()
+    }
+
     private fun initView() {
         with(binding) {
             btnLoginSignin.setOnClickListener { handleLoginClick() }
@@ -45,17 +51,51 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkAutoLogin() {
+        val sharedPref = getSharedPreferences(PREF_KEY_USER_ID, MODE_PRIVATE)
+        val userId = sharedPref.getString(PREF_KEY_USER_ID, null)
+        val userPw = sharedPref.getString(PREF_KEY_USER_PW, null)
+
+        if (!userId.isNullOrEmpty() && !userPw.isNullOrEmpty()) {
+            moveToMainActivity()
+        }
+    }
+
+    private fun moveToMainActivity() {
+        Intent(this@LoginActivity, MainActivity::class.java).apply {
+            startActivity(this)
+            finish()
+        }
+    }
+
     private fun handleLoginClick() {
         if (loginValid()) {
-            toast("로그인 성공!")
+            binding.root.snackBar(getString(R.string.login_success))
             Intent(this@LoginActivity, MainActivity::class.java).apply {
                 putExtra(EXTRA_DATA, viewModel.userInfo.value)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                saveUserPreference() // 사용자 정보 저장
                 startActivity(this)
                 finish()
             }
         } else {
-            binding.root.snackBar("아이디 혹은 비밀번호를 다시 확인해주세요.")
+            binding.root.snackBar(getString(R.string.login_fail))
         }
+    }
+
+    private fun saveUserPreference() {
+        val sharedPref = getSharedPreferences(PREF_KEY_USER_ID, MODE_PRIVATE)
+        sharedPref.edit().apply {
+            viewModel.userInfo.value?.saveTo(this)
+            apply()
+        }
+    }
+
+    private fun User.saveTo(editor: SharedPreferences.Editor) {
+        editor.putString(PREF_KEY_USER_ID, id)
+        editor.putString(PREF_KEY_USER_PW, pw)
+        editor.putString(PREF_KEY_USER_NICKNAME, nickname)
+        editor.putString(PREF_KEY_USER_HOBBY, hobby)
     }
 
     private fun handleSignupClick() {
@@ -75,6 +115,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_DATA = "user_data"
+        private const val EXTRA_DATA = "user_data"
+        private const val PREF_KEY_USER_ID = "user_id"
+        private const val PREF_KEY_USER_PW = "user_pw"
+        private const val PREF_KEY_USER_NICKNAME = "user_nickname"
+        private const val PREF_KEY_USER_HOBBY = "user_hobby"
     }
 }
