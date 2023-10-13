@@ -40,17 +40,17 @@ class SignupActivity : AppCompatActivity() {
 
         // 회원가입 형식이 맞으면 로그인 액티비티로 이동
         if (signupValid(user)) {
-            toast(stringOf(string.signup_signup_success))
+            toast(stringOf(string.signup_success))
             intentActivity(user)
         } else {
-            binding.root.snackBar(stringOf(string.signup_signup_fail))
+            binding.root.snackBar(stringOf(string.signup_fail))
         }
     }
 
     private fun intentActivity(user: User) {
         // 회원가입 정보를 user data class에 담아 로그인 액티비티로 전달
         val intent = Intent(this@SignupActivity, LoginActivity::class.java)
-        intent.putExtra("user_data", user)
+        intent.putExtra(EXTRA_DATA, user)
         setResult(RESULT_OK, intent)
         finish()
     }
@@ -70,6 +70,8 @@ class SignupActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val EXTRA_DATA = "user_data"
+
         //회원가입 조건
         private const val MIN_ID_LENGTH = 6
         private const val MAX_ID_LENGTH = 10
