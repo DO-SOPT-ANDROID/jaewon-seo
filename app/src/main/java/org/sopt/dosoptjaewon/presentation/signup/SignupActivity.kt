@@ -41,13 +41,13 @@ class SignupActivity : AppCompatActivity() {
         // 회원가입 형식이 맞으면 로그인 액티비티로 이동
         if (signupValid(user)) {
             toast(stringOf(string.signup_success))
-            intentActivity(user)
+            navigateToLogin(user)
         } else {
             binding.root.snackBar(stringOf(string.signup_fail))
         }
     }
 
-    private fun intentActivity(user: User) {
+    private fun navigateToLogin(user: User) {
         // 회원가입 정보를 user data class에 담아 로그인 액티비티로 전달
         val intent = Intent(this@SignupActivity, LoginActivity::class.java)
         intent.putExtra(EXTRA_DATA, user)
@@ -79,8 +79,8 @@ class SignupActivity : AppCompatActivity() {
         private const val MAX_PW_LENGTH = 12
 
         //정규식 패턴
-        private const val NICKNAME_PATTERN = "^[a-zA-Z0-9]*$"
-        private const val HOBBY_PATTERN = "^[a-zA-Z0-9]*$"
+        private const val NICKNAME_PATTERN = "^[a-zA-Z0-9가-힣]*$"
+        private const val HOBBY_PATTERN = "^[a-zA-Z0-9가-힣]*$"
         val nicknameRegex = Regex(NICKNAME_PATTERN)
         val hobbyRegex = Regex(HOBBY_PATTERN)
     }
