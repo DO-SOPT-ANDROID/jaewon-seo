@@ -3,11 +3,10 @@ package org.sopt.dosoptjaewon.presentation.signup
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.sopt.common.view.toast
 import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.ActivitySignupBinding
 import org.sopt.dosoptjaewon.presentation.login.LoginActivity
-import org.sopt.dosoptjaewon.util.snackbar
-import org.sopt.dosoptjaewon.util.toast
 
 class SignupActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignupBinding.inflate(layoutInflater) }
@@ -32,10 +31,10 @@ class SignupActivity : AppCompatActivity() {
 
                 // 회원가입 형식이 맞으면 로그인 액티비티로 이동
                 if (signupValid(user)) {
-                    toast("회원가입 완료")
+                    binding.root.toast("회원가입 완료")
                     intentActivity(user)
                 } else {
-                    binding.root.snackbar("회원가입 형식과 맞지 않습니다.")
+                    //binding.root.snackbar("회원가입 형식과 맞지 않습니다.")
                 }
             }
         }
