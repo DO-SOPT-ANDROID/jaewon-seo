@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -20,18 +19,8 @@ class LoginActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val viewModel: LoginViewModel by viewModels()
-    private lateinit var signupResultLauncher: ActivityResultLauncher<Intent>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
-        initResultLauncher()
-        initView()
-    }
-
-    private fun initResultLauncher() {
-        signupResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+    private val signupResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val user: User? = it.data?.getParcelableExtra(EXTRA_DATA)
                 if (user != null) {
@@ -41,6 +30,12 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        initView()
     }
 
     private fun initView() {
