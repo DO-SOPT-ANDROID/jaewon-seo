@@ -2,10 +2,13 @@ package org.sopt.dosoptjaewon.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.sopt.common.context.hideKeyboard
 import com.sopt.common.context.toast
 import com.sopt.common.view.snackBar
 import org.sopt.dosoptjaewon.data.model.User
@@ -27,8 +30,8 @@ class LoginActivity : AppCompatActivity() {
         initView()
     }
 
-    private fun initResultLauncher() =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+    private fun initResultLauncher() {
+        signupResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val user: User? = it.data?.getParcelableExtra(EXTRA_DATA)
                 if (user != null) {
@@ -38,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
     private fun initView() {
         with(binding) {
@@ -68,6 +72,11 @@ class LoginActivity : AppCompatActivity() {
         val id = viewModel.userInfo.value?.id
         val pw = viewModel.userInfo.value?.pw
         return binding.etLoginId.text.toString() == id && binding.etLoginPw.text.toString() == pw
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        hideKeyboard(currentFocus ?: View(this))
+        return super.dispatchTouchEvent(ev)
     }
 
     companion object {

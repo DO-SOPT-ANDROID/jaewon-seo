@@ -2,8 +2,12 @@ package org.sopt.dosoptjaewon.presentation.signup
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.sopt.common.view.toast
+import com.sopt.common.context.hideKeyboard
+import com.sopt.common.context.toast
+import com.sopt.common.view.snackBar
 import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.ActivitySignupBinding
 import org.sopt.dosoptjaewon.presentation.login.LoginActivity
@@ -14,29 +18,30 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setOnClickListener()
+        initView()
     }
 
-    private fun setOnClickListener() {
+    private fun initView() {
         with(binding) {
-            // 회원가입 완료 버튼 클릭 시
-            btnSignupComplete.setOnClickListener {
-                // 회원가입 정보를 담은 User 객체 생성
-                val user = User(
-                    id = etSignupId.text.toString(),
-                    pw = etSignupPw.text.toString(),
-                    nickname = etSignupNickname.text.toString(),
-                    hobby = etSignupHobby.text.toString()
-                )
+            btnSignupComplete.setOnClickListener { handleSignupCompleteClick() }
+        }
+    }
 
-                // 회원가입 형식이 맞으면 로그인 액티비티로 이동
-                if (signupValid(user)) {
-                    binding.root.toast("회원가입 완료")
-                    intentActivity(user)
-                } else {
-                    //binding.root.snackbar("회원가입 형식과 맞지 않습니다.")
-                }
-            }
+    private fun handleSignupCompleteClick() {
+        // 회원가입 정보를 담은 User 객체 생성
+        val user = User(
+            id = binding.etSignupId.text.toString(),
+            pw = binding.etSignupPw.text.toString(),
+            nickname = binding.etSignupNickname.text.toString(),
+            hobby = binding.etSignupHobby.text.toString()
+        )
+
+        // 회원가입 형식이 맞으면 로그인 액티비티로 이동
+        if (signupValid(user)) {
+            toast("회원가입 완료")
+            intentActivity(user)
+        } else {
+            binding.root.snackBar("회원가입 형식과 맞지 않습니다.")
         }
     }
 
@@ -50,14 +55,26 @@ class SignupActivity : AppCompatActivity() {
 
     // 회원가입 유효성 확인
     private fun signupValid(user: User): Boolean {
-        return user.id.length in 6..10 &&
-                user.pw.length in 8..12 &&
+        return user.id.length in MIN_ID_LENGTH..MAX_ID_LENGTH &&
+                user.pw.length in MIN_PW_LENGTH..MAX_PW_LENGTH &&
                 user.nickname.isNotBlank() && user.nickname.matches(nicknameRegex) &&
                 user.hobby.isNotBlank() && user.hobby.matches(hobbyRegex)
     }
 
-    //정규식 패턴
+    // 키보드 숨기기
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        hideKeyboard(currentFocus ?: View(this))
+        return super.dispatchTouchEvent(ev)
+    }
+
     companion object {
+        //회원가입 조건
+        private const val MIN_ID_LENGTH = 6
+        private const val MAX_ID_LENGTH = 10
+        private const val MIN_PW_LENGTH = 8
+        private const val MAX_PW_LENGTH = 12
+
+        //정규식 패턴
         private const val NICKNAME_PATTERN = "^[a-zA-Z0-9]*$"
         private const val HOBBY_PATTERN = "^[a-zA-Z0-9]*$"
         val nicknameRegex = Regex(NICKNAME_PATTERN)

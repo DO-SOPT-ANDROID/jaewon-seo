@@ -1,9 +1,12 @@
 package org.sopt.dosoptjaewon.presentation.main
 
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
+import com.sopt.common.context.hideKeyboard
 import org.sopt.dosoptjaewon.R
 import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.ActivityMainBinding

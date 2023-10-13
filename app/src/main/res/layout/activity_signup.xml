@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:paddingHorizontal="30dp">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/nsv_signup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/btn_signup_complete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,7 +17,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
 
             <TextView
                 android:id="@+id/tv_signup_title"
@@ -63,7 +65,7 @@
                 android:id="@+id/tv_signup_pw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/signup_pw"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +93,7 @@
                 android:id="@+id/tv_signup_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/signup_nickname"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/signup_nickname_hint"
+                    android:imeOptions="actionNext"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -119,7 +122,7 @@
                 android:id="@+id/tv_signup_hobby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/signup_hobby"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,25 +142,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/signup_hobby_hint"
+                    android:imeOptions="actionDone"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/btn_signup_complete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
+        android:padding="10dp"
         android:text="@string/signup_do_signup"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nsv_signup" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
