@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">DO SOPT by librarywon</string>
-
     <!-- signup -->
     <string name="signup_title">SIGN UP</string>
     <string name="signup_id">ID</string>
