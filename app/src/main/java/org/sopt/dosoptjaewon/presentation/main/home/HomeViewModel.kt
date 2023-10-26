@@ -12,7 +12,7 @@ class HomeViewModel : ViewModel() {
     val userInfo: MutableLiveData<User?>
         get() = _userInfo
 
-    val mockFriendsInfo = MutableLiveData<List<Friend>>(
+    val mockFriendsInfo = MutableLiveData(
         listOf(
             Friend(
                 R.drawable.ic_profile1,

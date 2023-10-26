@@ -46,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun clickBottomNavigation() {
         binding.bnvMain.setOnItemSelectedListener {
+            val bundle = Bundle().apply {
+                putParcelable(USER_BUNDLE_KEY, getUserInfo())
+            }
             when (it.itemId) {
                 R.id.menu_main_do_android -> {
                     replaceFragment(DoAndroidFragment())
@@ -53,17 +56,14 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.menu_main_home -> {
-                    replaceFragment(HomeFragment())
+                    val fragment = HomeFragment().apply {
+                        arguments = bundle
+                    }
+                    replaceFragment(fragment)
                     true
                 }
 
                 R.id.menu_main_mypage -> {
-                    // MypageFragment에 사용자 정보 전달
-                    val bundle = Bundle().apply {
-                        putParcelable(USER_BUNDLE_KEY, getUserInfo())
-                    }
-
-                    // Fragment에 argument 전달
                     val fragment = MypageFragment().apply {
                         arguments = bundle
                     }
@@ -92,14 +92,12 @@ class MainActivity : AppCompatActivity() {
             val userHobby = getString(PREF_KEY_USER_HOBBY, null)
 
             if (listOf(userId, userPw, userNickname, userHobby).all { it != null }) {
-                val user = User(
+                return User(
                     id = userId!!,
                     pw = userPw!!,
                     nickname = userNickname!!,
                     hobby = userHobby!!
                 )
-                binding.root.snackBar(getString(R.string.mypage_load_info_sucess))
-                return user
             } else {
                 binding.root.snackBar(getString(R.string.mypage_load_info_fail))
                 return null
