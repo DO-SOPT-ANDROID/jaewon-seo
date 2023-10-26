@@ -13,11 +13,11 @@ class DoAndroidFragment : Fragment() {
         get() = requireNotNull(_binding) { "_binding is  null" }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    ): View {
+        _binding = FragmentDoAndroidBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
