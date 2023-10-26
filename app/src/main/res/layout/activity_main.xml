@@ -6,111 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.MainActivity">
 
-
-    <TextView
-        android:id="@+id/tv_main_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:contentDescription="login title"
-        android:text="@string/main_title"
-        android:textSize="25sp"
-        android:textStyle="bold"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bnv_main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_main_logout"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:padding="1dp"
-        android:text="@string/main_logout"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_main_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_main_title" />
-
-    <ImageView
-        android:id="@+id/iv_main_profile"
-        android:layout_width="80dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_profile"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_title"
-        tools:src="@drawable/ic_profile" />
-
-    <TextView
-        android:id="@+id/tv_main_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/iv_main_profile"
-        app:layout_constraintStart_toEndOf="@id/iv_main_profile"
-        app:layout_constraintTop_toTopOf="@id/iv_main_profile"
-        tools:text="서재원" />
-
-    <TextView
-        android:id="@+id/tv_main_comment"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv_main"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="20dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="@string/main_comment"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_main_profile"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_main_nickname"
-        app:layout_constraintTop_toTopOf="@id/iv_main_profile" />
-
-    <TextView
-        android:id="@+id/tv_main_id_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="ID"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/iv_main_profile"
-        app:layout_constraintTop_toBottomOf="@id/iv_main_profile" />
-
-    <TextView
-        android:id="@+id/tv_main_id_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@id/iv_main_profile"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_id_title"
-        tools:text="librarywon" />
-
-    <TextView
-        android:id="@+id/tv_main_hobby_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="취미"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/iv_main_profile"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_id_value" />
-
-    <TextView
-        android:id="@+id/tv_main_hobby_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@id/iv_main_profile"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_hobby_title"
-        tools:text="잠자기" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
