@@ -30,13 +30,14 @@
         tools:text="서재원" />
 
     <TextView
+        android:id="@+id/tv_user_hobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="@id/iv_user_profile"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/iv_user_profile"
-        tools:text="제 취미는 000입니다."/>
+        tools:text="제 취미는 000입니다." />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
