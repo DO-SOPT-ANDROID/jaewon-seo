@@ -40,4 +40,6 @@
     <string name="menu_main_mypage">마이페이지</string>
     <string name="mypage_id">ID</string>
     <string name="mypage_hobby">취미</string>
+    <string name="user_profile_image">user profile image</string>
+    <string name="item_friend_gift">선물하기</string>
 </resources>
