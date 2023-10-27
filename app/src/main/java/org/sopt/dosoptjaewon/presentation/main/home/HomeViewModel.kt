@@ -78,7 +78,7 @@ class HomeViewModel : ViewModel() {
             Friend(
                 R.drawable.ic_profile2,
                 "김상호",
-                LocalDate.of(1999, 10, 27),
+                LocalDate.of(2000, 3, 27),
                 "Dancingintherain' (feat.Minggunyu) - 곽태풍"
             )
         )
