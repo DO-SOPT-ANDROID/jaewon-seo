@@ -32,8 +32,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initAdapter()
         viewModel.setUserInfo(getBundleData())
+        initAdapter()
     }
 
     private fun getBundleData(): User? {
@@ -47,6 +47,13 @@ class HomeFragment : Fragment() {
         binding.rvHome.layoutManager = LinearLayoutManager(context)
         binding.rvHome.adapter = concatAdapter
 
+        observeViewModel(userAdapter, friendAdapter)
+    }
+
+    private fun observeViewModel(
+        userAdapter: UserAdapter,
+        friendAdapter: FriendAdapter
+    ) {
         viewModel.userInfo.observe(viewLifecycleOwner) {
             userAdapter.setUser(it)
         }

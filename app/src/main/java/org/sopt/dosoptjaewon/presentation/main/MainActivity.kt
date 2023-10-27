@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 System.exit(0)  // 앱 프로세스 종료
             } else {
                 backPressedTime = System.currentTimeMillis()
-                toast(getString(R.string.mypage_back_press))
+                toast(getString(R.string.main_back_press))
             }
         }
     }
@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun clickBottomNavigation() {
         binding.bnvMain.setOnItemSelectedListener {
+            // User 정보를 넘겨줄 bundle 생성
             val bundle = Bundle().apply {
                 putParcelable(USER_BUNDLE_KEY, getUserInfo())
             }

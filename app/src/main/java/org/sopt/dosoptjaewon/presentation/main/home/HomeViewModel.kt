@@ -77,8 +77,6 @@ class HomeViewModel : ViewModel() {
             )
         )
     )
-
-
     fun setUserInfo(user: User?) {
         _userInfo.value = user
     }

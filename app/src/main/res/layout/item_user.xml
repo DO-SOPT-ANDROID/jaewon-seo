@@ -39,5 +39,4 @@
         app:layout_constraintTop_toTopOf="@id/iv_user_profile"
         tools:text="제 취미는 000입니다." />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
