@@ -74,6 +74,12 @@ class HomeViewModel : ViewModel() {
                 "박강희",
                 LocalDate.of(1999, 10, 27),
                 "HAPPY - NF"
+            ),
+            Friend(
+                R.drawable.ic_profile2,
+                "김상호",
+                LocalDate.of(1999, 10, 27),
+                "Dancingintherain' (feat.Minggunyu) - 곽태풍"
             )
         )
     )
