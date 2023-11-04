@@ -35,13 +35,13 @@ class FriendAdapter : ListAdapter<Friend, FriendAdapter.FriendViewHolder>(
             binding.ivFriendProfile.load(friendInfo.profileImage) {
                 transformations(CircleCropTransformation())
             }
-            binding.tvFriendName.text = friendInfo.name
+            binding.tvFriendBirthdayName.text = friendInfo.name
 
             // if today is brithDay
             if (brithDayConfirm(friendInfo.birthDay)) {
                 with(binding) {
                     llFriendGift.visibility = ViewGroup.VISIBLE
-                    tvFriendName.text = friendInfo.name + "\uD83C\uDF82"
+                    tvFriendBirthdayName.text = friendInfo.name + "\uD83C\uDF82"
                     tvFriendBrithDay.visibility = ViewGroup.VISIBLE
                     tvFriendBrithDay.text =
                         friendInfo.birthDay.format(DateTimeFormatter.ofPattern(BIRTHDAY_PATTERN))
@@ -55,7 +55,7 @@ class FriendAdapter : ListAdapter<Friend, FriendAdapter.FriendViewHolder>(
             }
 
             // update is true
-            if (friendInfo.update) binding.vFriendNew.visibility = ViewGroup.VISIBLE
+             binding.vFriendNew.visibility = ViewGroup.VISIBLE
         }
 
         private fun brithDayConfirm(date: LocalDate): Boolean {
