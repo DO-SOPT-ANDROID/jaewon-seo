@@ -35,13 +35,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        clickBottomNavigation()
+        // 기본 프래그먼트로 HomeFragment를 설정합니다.
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fcv_main, HomeFragment())
+                .commit()
+        }
         initView()
     }
 
     private fun initView() {
+        // 하단 네비게이션 바의 기본 선택을 설정합니다.
+        binding.bnvMain.setSelectedItemId(R.id.menu_main_home)
         onBackPressedDispatcher.addCallback(this, backPressedCallback)
-
-        clickBottomNavigation()
     }
 
     private fun clickBottomNavigation() {
