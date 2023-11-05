@@ -1,6 +1,7 @@
 package org.sopt.dosoptjaewon.presentation.main.home.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,27 +36,29 @@ class FriendAdapter : ListAdapter<Friend, FriendAdapter.FriendViewHolder>(
             binding.ivFriendProfile.load(friendInfo.profileImage) {
                 transformations(CircleCropTransformation())
             }
-            binding.tvFriendBirthdayName.text = friendInfo.name
+            binding.tvFriendName.text = friendInfo.name
 
             // if today is brithDay
             if (brithDayConfirm(friendInfo.birthDay)) {
                 with(binding) {
-                    llFriendGift.visibility = ViewGroup.VISIBLE
-                    tvFriendBirthdayName.text = friendInfo.name + "\uD83C\uDF82"
-                    tvFriendBrithDay.visibility = ViewGroup.VISIBLE
+                    llFriendGift.visibility = View.VISIBLE
+                    tvFriendName.text = friendInfo.name + "\uD83C\uDF82"
+                    tvFriendBrithDay.visibility = View.VISIBLE
                     tvFriendBrithDay.text =
                         friendInfo.birthDay.format(DateTimeFormatter.ofPattern(BIRTHDAY_PATTERN))
                 }
             } else {
                 // if music is not empty
                 if (friendInfo.music.isNotEmpty()) {
-                    binding.llFriendMusic.visibility = ViewGroup.VISIBLE
+                    binding.llFriendMusic.visibility = View.VISIBLE
                     binding.tvFriendMusic.text = friendInfo.music
                 }
             }
 
             // update is true
-             binding.vFriendNew.visibility = ViewGroup.VISIBLE
+            if (friendInfo.update) {
+                binding.vFriendNew.visibility = View.VISIBLE
+            }
         }
 
         private fun brithDayConfirm(date: LocalDate): Boolean {

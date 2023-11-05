@@ -43,7 +43,7 @@ class HomeViewModel : ViewModel() {
             Friend(
                 R.drawable.ic_profile1,
                 "김지영",
-                LocalDate.of(1999, 8, 20),
+                LocalDate.of(1999, 11, 5),
             ),
             Friend(
                 R.drawable.ic_profile2,

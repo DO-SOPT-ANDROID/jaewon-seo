@@ -31,7 +31,7 @@
         tools:src="@drawable/ic_profile" />
 
     <TextView
-        android:id="@+id/tv_friend_birthday_name"
+        android:id="@+id/tv_friend_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -45,15 +45,14 @@
         tools:text="서재원" />
 
     <TextView
-        android:layout_marginBottom="10dp"
         android:id="@+id/tv_friend_brithDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_friend_profile"
         app:layout_constraintStart_toEndOf="@id/iv_friend_profile"
-        app:layout_constraintTop_toBottomOf="@id/tv_friend_birthday_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_friend_name"
         tools:text="오늘 10월 26일" />
 
     <LinearLayout
