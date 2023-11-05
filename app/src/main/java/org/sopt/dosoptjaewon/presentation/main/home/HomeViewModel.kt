@@ -54,7 +54,7 @@ class HomeViewModel : ViewModel() {
             Friend(
                 R.drawable.ic_profile3,
                 "배지현",
-                LocalDate.of(2001, 11, 28)
+                LocalDate.of(2001, 11, 25)
             ),
             Friend(
                 R.drawable.ic_profile1,
@@ -66,7 +66,7 @@ class HomeViewModel : ViewModel() {
             Friend(
                 R.drawable.ic_profile2,
                 "최준서",
-                LocalDate.of(2001, 5, 11),
+                LocalDate.of(1999, 5, 11),
                 "Vancouver 2 - BIG Naughty (서동현)"
             ),
             Friend(
@@ -79,6 +79,12 @@ class HomeViewModel : ViewModel() {
                 R.drawable.ic_profile2,
                 "김상호",
                 LocalDate.of(2000, 3, 27),
+                "Dancingintherain' (feat.Minggunyu) - 곽태풍"
+            ),
+            Friend(
+                R.drawable.ic_profile3,
+                "우상욱",
+                LocalDate.of(1998, 9, 26),
                 "Dancingintherain' (feat.Minggunyu) - 곽태풍"
             )
         )
