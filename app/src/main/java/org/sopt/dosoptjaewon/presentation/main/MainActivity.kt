@@ -48,6 +48,13 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         // 하단 네비게이션 바의 기본 선택을 설정합니다.
         binding.bnvMain.setSelectedItemId(R.id.menu_main_home)
+        binding.bnvMain.setOnItemReselectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_main_home -> {
+                    (supportFragmentManager.findFragmentById(R.id.fcv_main) as? HomeFragment)?.scrollToTop()
+                }
+            }
+        }
         onBackPressedDispatcher.addCallback(this, backPressedCallback)
     }
 

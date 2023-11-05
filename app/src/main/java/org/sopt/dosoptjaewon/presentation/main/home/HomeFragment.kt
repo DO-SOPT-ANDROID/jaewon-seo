@@ -63,6 +63,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    fun scrollToTop() {
+        binding.rvHome.scrollToPosition(0)
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
