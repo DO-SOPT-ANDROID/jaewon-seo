@@ -14,7 +14,7 @@ class LoginViewModel : ViewModel() {
         _userInfo.value = user
     }
 
-    fun loginValid(id: String, pw: String): Boolean {
+    fun isLoginValid(id: String, pw: String): Boolean {
         return userInfo.value?.id == id && userInfo.value?.pw == pw
     }
 }

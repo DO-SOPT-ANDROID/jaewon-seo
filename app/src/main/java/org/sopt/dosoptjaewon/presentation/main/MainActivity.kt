@@ -9,6 +9,7 @@ import com.sopt.common.view.snackBar
 import org.sopt.dosoptjaewon.R
 import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.ActivityMainBinding
+import org.sopt.dosoptjaewon.presentation.login.LoginActivity.Companion.PREF_FILE_USER
 import org.sopt.dosoptjaewon.presentation.main.doandroid.DoAndroidFragment
 import org.sopt.dosoptjaewon.presentation.main.home.HomeFragment
 import org.sopt.dosoptjaewon.presentation.main.mypage.MypageFragment
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getUserInfo(): User? {
-        val sharedPref = getSharedPreferences(PREF_KEY_USER_ID, MODE_PRIVATE)
+        val sharedPref = getSharedPreferences(PREF_FILE_USER, MODE_PRIVATE)
 
         with(sharedPref) {
             val userId = getString(PREF_KEY_USER_ID, null)
@@ -114,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                     hobby = userHobby!!
                 )
             } else {
-                binding.root.snackBar(getString(R.string.mypage_load_info_fail))
+                binding.root.snackBar(R.string.mypage_load_info_fail)
                 return null
             }
         }
@@ -123,10 +124,10 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val BACK_PRESS_INTERVAL = 2000 // 2초
 
-        const val PREF_KEY_USER_ID = "user_id"
-        const val PREF_KEY_USER_PW = "user_pw"
-        const val PREF_KEY_USER_NICKNAME = "user_nickname"
-        const val PREF_KEY_USER_HOBBY = "user_hobby"
+        const val PREF_KEY_USER_ID = "PREF_KEY_USER_ID"
+        const val PREF_KEY_USER_PW = "PREF_KEY_USER_PW"
+        const val PREF_KEY_USER_NICKNAME = "PREF_KEY_USER_NICKNAME"
+        const val PREF_KEY_USER_HOBBY = "PREF_KEY_USER_HOBBY"
 
         const val USER_BUNDLE_KEY = "user_info"
     }

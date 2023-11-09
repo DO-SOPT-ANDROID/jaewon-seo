@@ -19,7 +19,7 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding
         get() = requireNotNull(_binding) { "_binding is  null" }
 
-    private val viewModel: HomeViewModel by lazy { HomeViewModel() }
+    private val homeViewModel: HomeViewModel by lazy { HomeViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setUserInfo(getBundleData())
+        homeViewModel.setUserInfo(getBundleData())
         initAdapter()
     }
 
@@ -47,18 +47,18 @@ class HomeFragment : Fragment() {
         binding.rvHome.layoutManager = LinearLayoutManager(context)
         binding.rvHome.adapter = concatAdapter
 
-        observeViewModel(userAdapter, friendAdapter)
+        observeHomeViewModel(userAdapter, friendAdapter)
     }
 
-    private fun observeViewModel(
+    private fun observeHomeViewModel(
         userAdapter: UserAdapter,
         friendAdapter: FriendAdapter
     ) {
-        viewModel.userInfo.observe(viewLifecycleOwner) {
+        homeViewModel.userInfo.observe(viewLifecycleOwner) {
             userAdapter.setUser(it)
         }
 
-        viewModel.mockFriendsInfo.observe(viewLifecycleOwner) {
+        homeViewModel.mockFriendsInfo.observe(viewLifecycleOwner) {
             friendAdapter.submitList(it)
         }
     }
