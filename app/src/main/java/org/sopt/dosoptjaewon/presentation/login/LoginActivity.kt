@@ -57,14 +57,14 @@ class LoginActivity : AppCompatActivity() {
         val userPw = sharedPref.getString(PREF_KEY_USER_PW, null)
 
         if (!userId.isNullOrEmpty() && !userPw.isNullOrEmpty()) {
-            moveToMainActivity()
+            navigateToMypage()
         }
     }
 
-    private fun moveToMainActivity() {
+    private fun navigateToMypage() {
         Intent(this@LoginActivity, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(this)
-            finish()
         }
     }
 

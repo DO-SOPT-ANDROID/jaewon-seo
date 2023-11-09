@@ -25,12 +25,21 @@
     <string name="login_fail">로그인에 실패했습니다.</string>
     <string name="login_success">로그인에 성공했습니다.</string>
 
-    <!-- main -->
-    <string name="main_name">서재원</string>
-    <string name="main_comment">안녕하세요 반갑습니다 서재원입니다.</string>
-    <string name="main_title">DO SOPT</string>
-    <string name="main_logout">로그아웃</string>
+    <!-- mypage -->
+    <string name="mypage_name">서재원</string>
+    <string name="mypage_comment">안녕하세요 반갑습니다 서재원입니다.</string>
+    <string name="mypage_title">DO SOPT</string>
+    <string name="mypage_logout">로그아웃</string>
     <string name="main_back_press">"뒤로 가기 버튼을 한 번 더 누르면 앱이 종료됩니다."</string>
-    <string name="main_load_info_sucess">"유저 정보를 가져오는데 성공하였습니다."</string>
-    <string name="main_load_info_fail">"유저 정보를 가져오는데 실패하였습니다."</string>
+    <string name="mypage_load_info_sucess">"유저 정보를 가져오는데 성공하였습니다."</string>
+    <string name="mypage_load_info_fail">"유저 정보를 가져오는데 실패하였습니다."</string>
+
+    <!-- menu/main -->
+    <string name="menu_main_do_android">DO ANDROID</string>
+    <string name="menu_main_home">홈</string>
+    <string name="menu_main_mypage">마이페이지</string>
+    <string name="mypage_id">ID</string>
+    <string name="mypage_hobby">취미</string>
+    <string name="user_profile_image">user profile image</string>
+    <string name="item_friend_gift">선물하기</string>
 </resources>

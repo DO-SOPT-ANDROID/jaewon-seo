@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Pophory color 가져옴 ㅎㅎ-->
+    <color name="pophory_purple">#725BFF</color>
+    <color name="pophory_red">#FC4646</color>
+    <color name="pophory_black">#FF212121</color>
+    <color name="gray_50">#5F6168</color>
+    <color name="gray_40">#B8B9BE</color>
+    <color name="gray_30">#E0E1E5</color>
+    <color name="gray_20">#F5F5F5</color>
+    <color name="gray_10">#FCFCFC</color>
 </resources>
