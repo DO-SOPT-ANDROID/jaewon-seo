@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.FragmentHomeBinding
-import org.sopt.dosoptjaewon.presentation.main.MainActivity
+import org.sopt.dosoptjaewon.presentation.main.MainViewModel
 import org.sopt.dosoptjaewon.presentation.main.home.adapter.FriendAdapter
 import org.sopt.dosoptjaewon.presentation.main.home.adapter.UserAdapter
 
@@ -19,7 +19,7 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding
         get() = requireNotNull(_binding) { "_binding is  null" }
 
-    private val homeViewModel: HomeViewModel by lazy { HomeViewModel() }
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,12 +32,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.setUserInfo(getBundleData())
         initAdapter()
-    }
-
-    private fun getBundleData(): User? {
-        return arguments?.getParcelable<User>(MainActivity.USER_BUNDLE_KEY)
     }
 
     private fun initAdapter() {
@@ -54,11 +49,11 @@ class HomeFragment : Fragment() {
         userAdapter: UserAdapter,
         friendAdapter: FriendAdapter
     ) {
-        homeViewModel.userInfo.observe(viewLifecycleOwner) {
+        mainViewModel.userInfo.observe(viewLifecycleOwner) {
             userAdapter.setUser(it)
         }
 
-        homeViewModel.mockFriendsInfo.observe(viewLifecycleOwner) {
+        mainViewModel.mockFriendsInfo.observe(viewLifecycleOwner) {
             friendAdapter.submitList(it)
         }
     }

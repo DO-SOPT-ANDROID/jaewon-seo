@@ -69,7 +69,6 @@ class SignupActivity : AppCompatActivity() {
             putExtra(EXTRA_USER, user)
         }
 
-
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         hideKeyboard(currentFocus ?: View(this))
         return super.dispatchTouchEvent(ev)

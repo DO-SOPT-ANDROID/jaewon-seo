@@ -2,6 +2,7 @@ package org.sopt.dosoptjaewon.presentation.main
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.sopt.common.context.toast
@@ -13,82 +14,62 @@ import org.sopt.dosoptjaewon.presentation.login.LoginActivity.Companion.PREF_FIL
 import org.sopt.dosoptjaewon.presentation.main.doandroid.DoAndroidFragment
 import org.sopt.dosoptjaewon.presentation.main.home.HomeFragment
 import org.sopt.dosoptjaewon.presentation.main.mypage.MypageFragment
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val mainViewModel: MainViewModel by viewModels()
     private var backPressedTime: Long = 0L
-    private val backPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            if (System.currentTimeMillis() - backPressedTime < BACK_PRESS_INTERVAL) {
-                isEnabled = false
-                onBackPressedDispatcher.onBackPressed()
-                finishAffinity() // 앱의 모든 액티비티를 종료
-                System.exit(0)  // 앱 프로세스 종료
-            } else {
-                backPressedTime = System.currentTimeMillis()
-                toast(getString(R.string.main_back_press))
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        clickBottomNavigation()
-        // 기본 프래그먼트로 HomeFragment를 설정합니다.
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fcv_main, HomeFragment())
-                .commit()
-        }
-        initView()
+        setupViewModel()
+        setupNavigation()
+        setupBackPressedHandler()
     }
 
-    private fun initView() {
-        // 하단 네비게이션 바의 기본 선택을 설정합니다.
+    private fun setupViewModel() {
+        val user = getUserInfo()
+        if (user != null) {
+            mainViewModel.setUserInfo(user)
+        } else {
+            showUserInfoLoadError()
+        }
+    }
+
+    private fun showUserInfoLoadError() {
+        binding.root.snackBar(R.string.mypage_load_info_error)
+    }
+
+    private fun setupNavigation() {
+        setupNavigationBar()
+        setupBottomNavigationClickListener()
+    }
+
+    private fun setupNavigationBar() {
         binding.bnvMain.setSelectedItemId(R.id.menu_main_home)
-        binding.bnvMain.setOnItemReselectedListener { item ->
-            when (item.itemId) {
-                R.id.menu_main_home -> {
-                    (supportFragmentManager.findFragmentById(R.id.fcv_main) as? HomeFragment)?.scrollToTop()
-                }
-            }
-        }
-        onBackPressedDispatcher.addCallback(this, backPressedCallback)
     }
 
-    private fun clickBottomNavigation() {
-        binding.bnvMain.setOnItemSelectedListener {
-            // User 정보를 넘겨줄 bundle 생성
-            val bundle = Bundle().apply {
-                putParcelable(USER_BUNDLE_KEY, getUserInfo())
+    private fun setupBottomNavigationClickListener() {
+        binding.bnvMain.setOnItemSelectedListener { item ->
+            val fragment = getFragmentForMenuItem(item.itemId)
+            if (fragment != null) {
+                replaceFragment(fragment)
+                true
+            } else {
+                false
             }
-            when (it.itemId) {
-                R.id.menu_main_do_android -> {
-                    replaceFragment(DoAndroidFragment())
-                    true
-                }
+        }
+    }
 
-                R.id.menu_main_home -> {
-                    val fragment = HomeFragment().apply {
-                        arguments = bundle
-                    }
-                    replaceFragment(fragment)
-                    true
-                }
-
-                R.id.menu_main_mypage -> {
-                    val fragment = MypageFragment().apply {
-                        arguments = bundle
-                    }
-                    replaceFragment(fragment)
-                    true
-                }
-
-                else -> false
-            }
+    private fun getFragmentForMenuItem(itemId: Int): Fragment? {
+        return when (itemId) {
+            R.id.menu_main_do_android -> DoAndroidFragment()
+            R.id.menu_main_home -> HomeFragment()
+            R.id.menu_main_mypage -> MypageFragment()
+            else -> null
         }
     }
 
@@ -98,37 +79,52 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    private fun setupBackPressedHandler() {
+        val backPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isBackPressIntervalElapsed()) {
+                    exitApplication()
+                } else {
+                    updateBackPressedTime()
+                    toast(getString(R.string.main_back_press))
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, backPressedCallback)
+    }
+
+    private fun isBackPressIntervalElapsed() =
+        System.currentTimeMillis() - backPressedTime < BACK_PRESS_INTERVAL
+
+    private fun updateBackPressedTime() {
+        backPressedTime = System.currentTimeMillis()
+    }
+
+    private fun exitApplication() {
+        finishAffinity()
+        exitProcess(0)
+    }
+
     private fun getUserInfo(): User? {
         val sharedPref = getSharedPreferences(PREF_FILE_USER, MODE_PRIVATE)
-
-        with(sharedPref) {
+        return with(sharedPref) {
             val userId = getString(PREF_KEY_USER_ID, null)
             val userPw = getString(PREF_KEY_USER_PW, null)
             val userNickname = getString(PREF_KEY_USER_NICKNAME, null)
             val userHobby = getString(PREF_KEY_USER_HOBBY, null)
-
-            if (listOf(userId, userPw, userNickname, userHobby).all { it != null }) {
-                return User(
-                    id = userId!!,
-                    pw = userPw!!,
-                    nickname = userNickname!!,
-                    hobby = userHobby!!
-                )
+            if (userId != null && userPw != null && userNickname != null && userHobby != null) {
+                User(userId, userPw, userNickname, userHobby)
             } else {
-                binding.root.snackBar(R.string.mypage_load_info_fail)
-                return null
+                null
             }
         }
     }
 
     companion object {
         private const val BACK_PRESS_INTERVAL = 2000 // 2초
-
         const val PREF_KEY_USER_ID = "PREF_KEY_USER_ID"
         const val PREF_KEY_USER_PW = "PREF_KEY_USER_PW"
         const val PREF_KEY_USER_NICKNAME = "PREF_KEY_USER_NICKNAME"
         const val PREF_KEY_USER_HOBBY = "PREF_KEY_USER_HOBBY"
-
-        const val USER_BUNDLE_KEY = "user_info"
     }
 }
