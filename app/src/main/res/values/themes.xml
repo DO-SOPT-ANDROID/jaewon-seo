@@ -4,6 +4,11 @@
         <item name="colorPrimary">@color/pophory_purple</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSurface">@color/pophory_purple</item>
+        <item name="colorOnSurfaceVariant">@color/white</item>
+        <item name="colorOnSecondaryContainer">@color/purple_700</item>
+        <item name="colorOnSurface">@color/purple_700</item>
     </style>
 
     <style name="Theme.DoSoptJaewon" parent="Base.Theme.DoSoptJaewon" />
