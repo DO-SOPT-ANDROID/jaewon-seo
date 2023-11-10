@@ -32,39 +32,55 @@ class FriendAdapter : ListAdapter<Friend, FriendAdapter.FriendViewHolder>(
 
     class FriendViewHolder(private val binding: ItemFriendBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(friendInfo: Friend) {
-            binding.ivFriendProfile.load(friendInfo.profileImage) {
+
+        fun onBind(friend: Friend) {
+            displayProfileImage(friend.profileImage)
+            displayFriendName(friend.name)
+            displayBirthdayIfToday(friend)
+            displayMusicIfNotEmpty(friend)
+            displayUpdateIndicator(friend)
+        }
+
+        private fun displayProfileImage(imageResId: Int) {
+            binding.ivFriendProfile.load(imageResId) {
                 transformations(CircleCropTransformation())
-            }
-            binding.tvFriendName.text = friendInfo.name
-
-            // if today is brithDay
-            if (brithDayConfirm(friendInfo.birthDay)) {
-                with(binding) {
-                    llFriendGift.visibility = View.VISIBLE
-                    tvFriendName.text = friendInfo.name + "\uD83C\uDF82"
-                    tvFriendBrithDay.visibility = View.VISIBLE
-                    tvFriendBrithDay.text =
-                        friendInfo.birthDay.format(DateTimeFormatter.ofPattern(BIRTHDAY_PATTERN))
-                }
-            } else {
-                // if music is not empty
-                if (friendInfo.music.isNotEmpty()) {
-                    binding.llFriendMusic.visibility = View.VISIBLE
-                    binding.tvFriendMusic.text = friendInfo.music
-                }
-            }
-
-            // update is true
-            if (friendInfo.update) {
-                binding.vFriendNew.visibility = View.VISIBLE
             }
         }
 
-        private fun brithDayConfirm(date: LocalDate): Boolean {
+        private fun displayFriendName(name: String) {
+            binding.tvFriendName.text = name
+        }
+
+        private fun displayBirthdayIfToday(friend: Friend) {
+            if (isTodayBirthday(friend.birthDay)) {
+                binding.llFriendGift.visibility = View.VISIBLE
+                binding.tvFriendName.text = friend.name + "\uD83C\uDF82"
+                binding.tvFriendBrithDay.text = formatBirthday(friend.birthDay)
+            } else {
+                binding.llFriendGift.visibility = View.GONE
+            }
+        }
+
+        private fun displayMusicIfNotEmpty(friend: Friend) {
+            if (friend.music.isNotEmpty()) {
+                binding.llFriendMusic.visibility = View.VISIBLE
+                binding.tvFriendMusic.text = friend.music
+            } else {
+                binding.llFriendMusic.visibility = View.GONE
+            }
+        }
+
+        private fun displayUpdateIndicator(friend: Friend) {
+            binding.vFriendNew.visibility = if (friend.update) View.VISIBLE else View.GONE
+        }
+
+        private fun isTodayBirthday(date: LocalDate): Boolean {
             val today = LocalDate.now()
             return today.monthValue == date.monthValue && today.dayOfMonth == date.dayOfMonth
         }
+
+        private fun formatBirthday(date: LocalDate): String =
+            date.format(DateTimeFormatter.ofPattern(BIRTHDAY_PATTERN))
     }
 
     companion object {
