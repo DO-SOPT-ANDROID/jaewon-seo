@@ -25,9 +25,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         setupViewModel()
         setupNavigation()
         setupBackPressedHandler()
+
+        if (savedInstanceState == null) {
+            setupDefaultFragment()
+            setupDefaultBottomNavigation()
+        }
     }
 
     private fun setupViewModel() {
@@ -62,6 +68,14 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
+
+        binding.bnvMain.setOnItemReselectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_main_home -> {
+                    (supportFragmentManager.findFragmentById(R.id.fcv_main) as? HomeFragment)?.scrollToTop()
+                }
+            }
+        }
     }
 
     private fun getFragmentForMenuItem(itemId: Int): Fragment? {
@@ -77,6 +91,14 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcv_main, fragment)
             .commit()
+    }
+
+    private fun setupDefaultFragment() {
+        replaceFragment(HomeFragment())
+    }
+
+    private fun setupDefaultBottomNavigation() {
+        binding.bnvMain.selectedItemId = R.id.menu_main_home
     }
 
     private fun setupBackPressedHandler() {
