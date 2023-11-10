@@ -19,6 +19,7 @@
         tools:src="@drawable/ic_profile" />
 
     <TextView
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
         tools:text="서재원" />
 
     <TextView
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
         android:id="@+id/tv_user_hobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

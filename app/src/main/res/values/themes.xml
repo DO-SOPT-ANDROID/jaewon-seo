@@ -9,7 +9,15 @@
         <item name="colorOnSurfaceVariant">@color/white</item>
         <item name="colorOnSecondaryContainer">@color/purple_700</item>
         <item name="colorOnSurface">@color/purple_700</item>
+
+        <!-- Headline -->
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.DoSoptJaewon.HeadLineBold</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.DoSoptJaewon.HeadLineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.DoSoptJaewon.HeadLineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.DoSoptJaewon.HeadLineSmall</item>
     </style>
 
     <style name="Theme.DoSoptJaewon" parent="Base.Theme.DoSoptJaewon" />
+
+
 </resources>

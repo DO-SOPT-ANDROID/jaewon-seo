@@ -22,6 +22,7 @@
 
             <TextView
                 android:id="@+id/tv_signup_title"
+                style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -35,6 +36,7 @@
 
             <TextView
                 android:id="@+id/tv_login_id"
+                style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -63,6 +65,7 @@
 
             <TextView
                 android:id="@+id/tv_signup_pw"
+                style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -91,6 +94,7 @@
 
             <TextView
                 android:id="@+id/tv_signup_name"
+                style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -120,6 +124,7 @@
 
             <TextView
                 android:id="@+id/tv_signup_hobby"
+                style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -153,6 +158,7 @@
 
     <Button
         android:id="@+id/btn_signup_complete"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"

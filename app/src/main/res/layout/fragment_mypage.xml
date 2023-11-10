@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/tv_mypage_title"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -21,6 +22,7 @@
 
     <Button
         android:id="@+id/btn_mypage_logout"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineMedium"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -45,10 +47,11 @@
 
     <TextView
         android:id="@+id/tv_mypage_nickname"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:textSize="20sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
         app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
@@ -57,6 +60,7 @@
 
     <TextView
         android:id="@+id/tv_mypage_comment"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -64,7 +68,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/mypage_comment"
-        android:textSize="15sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_mypage_nickname"
@@ -72,6 +76,7 @@
 
     <TextView
         android:id="@+id/tv_mypage_id_title"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -83,6 +88,7 @@
 
     <TextView
         android:id="@+id/tv_mypage_id_value"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -93,6 +99,7 @@
 
     <TextView
         android:id="@+id/tv_mypage_hobby_title"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -104,6 +111,7 @@
 
     <TextView
         android:id="@+id/tv_mypage_hobby_value"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
