@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.sopt.dosoptjaewon.R
 import org.sopt.dosoptjaewon.databinding.FragmentHomeBinding
-import org.sopt.dosoptjaewon.model.Friend
+import org.sopt.dosoptjaewon.domain.model.Friend
 import org.sopt.dosoptjaewon.presentation.main.MainViewModel
 import org.sopt.dosoptjaewon.presentation.main.home.adapter.FriendAdapter
 import org.sopt.dosoptjaewon.presentation.main.home.adapter.UserAdapter

@@ -9,7 +9,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.sopt.common.adapter.ItemDiffCallback
 import org.sopt.dosoptjaewon.databinding.ItemFriendBinding
-import org.sopt.dosoptjaewon.model.Friend
+import org.sopt.dosoptjaewon.domain.model.Friend
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

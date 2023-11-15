@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.sopt.dosoptjaewon.R
 import org.sopt.dosoptjaewon.data.model.User
-import org.sopt.dosoptjaewon.model.Friend
+import org.sopt.dosoptjaewon.domain.model.Friend
 import java.time.LocalDate
 
 class MainViewModel : ViewModel() {
