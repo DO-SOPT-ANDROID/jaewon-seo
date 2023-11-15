@@ -31,6 +31,7 @@
         tools:src="@drawable/ic_profile" />
 
     <TextView
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
         android:id="@+id/tv_friend_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,18 +39,19 @@
         android:ellipsize="end"
         android:maxWidth="100dp"
         android:maxLines="1"
-        android:textSize="13sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@id/tv_friend_brithDay"
         app:layout_constraintStart_toEndOf="@id/iv_friend_profile"
         app:layout_constraintTop_toTopOf="@id/iv_friend_profile"
         tools:text="서재원" />
 
     <TextView
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
         android:id="@+id/tv_friend_brithDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:textSize="8sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_friend_profile"
         app:layout_constraintStart_toEndOf="@id/iv_friend_profile"
         app:layout_constraintTop_toBottomOf="@id/tv_friend_name"
@@ -101,6 +103,7 @@
         tools:visibility="visible">
 
         <TextView
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineMedium"
             android:id="@+id/tv_friend_music"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

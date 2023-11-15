@@ -7,7 +7,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.common.context.hideKeyboard
-import com.sopt.common.context.stringOf
 import com.sopt.common.context.toast
 import com.sopt.common.view.snackBar
 import org.sopt.dosoptjaewon.R.string
@@ -18,60 +17,64 @@ import org.sopt.dosoptjaewon.presentation.login.LoginActivity
 class SignupActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignupBinding.inflate(layoutInflater) }
     private val viewModel: SignupViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        initView()
-        observeViewModel()
+        setupViewListeners()
+        setupViewModelObservers()
     }
 
-    private fun initView() {
-        with(binding) {
-            btnSignupComplete.setOnClickListener {
-                val user = User(
-                    id = binding.etSignupId.text.toString(),
-                    pw = binding.etSignupPw.text.toString(),
-                    nickname = binding.etSignupNickname.text.toString(),
-                    hobby = binding.etSignupHobby.text.toString()
-                )
-                viewModel.handleSignup(user)
-            }
-        }
+    private fun setupViewListeners() {
+        binding.btnSignupComplete.setOnClickListener { createUserAndSignup() }
     }
 
-    private fun observeViewModel() {
+    private fun createUserAndSignup() {
+        val user = createUserFromInput()
+        viewModel.handleSignup(user)
+    }
+
+    private fun createUserFromInput(): User {
+        return User(
+            id = binding.etSignupId.text.toString(),
+            pw = binding.etSignupPw.text.toString(),
+            nickname = binding.etSignupNickname.text.toString(),
+            hobby = binding.etSignupHobby.text.toString()
+        )
+    }
+
+    private fun setupViewModelObservers() {
         viewModel.signupState.observe(this) { state ->
             when (state) {
                 is SignupState.Success -> {
-                    toast(stringOf(string.signup_success))
-                    navigateToLogin(state.user)
+                    toast(getString(string.signup_success))
+                    navigateToLoginActivity(state.user)
                 }
-
                 is SignupState.Failure -> {
-                    binding.root.snackBar(getString(string.signup_fail))
+                    binding.root.snackBar(string.signup_fail)
                 }
-
                 else -> {}
             }
         }
     }
 
-    private fun navigateToLogin(user: User) {
-        // 회원가입 정보를 user data class에 담아 로그인 액티비티로 전달
-        val intent = Intent(this@SignupActivity, LoginActivity::class.java)
-        intent.putExtra(EXTRA_DATA, user)
+    private fun navigateToLoginActivity(user: User) {
+        val intent = createLoginIntentWithUser(user)
         setResult(RESULT_OK, intent)
         finish()
     }
 
-    // 키보드 숨기기
+    private fun createLoginIntentWithUser(user: User): Intent =
+        Intent(this, LoginActivity::class.java).apply {
+            putExtra(EXTRA_USER, user)
+        }
+
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         hideKeyboard(currentFocus ?: View(this))
         return super.dispatchTouchEvent(ev)
     }
 
     companion object {
-        private const val EXTRA_DATA = "user_data"
+        const val EXTRA_USER = "EXTRA_USER"
     }
 }

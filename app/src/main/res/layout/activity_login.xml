@@ -7,10 +7,12 @@
 
     <TextView
         android:id="@+id/tv_login_title"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:contentDescription="login title"
+        android:fontFamily="@font/pretendard_bold"
         android:text="@string/login_title"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -20,6 +22,7 @@
 
     <TextView
         android:id="@+id/tv_login_id"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -39,15 +42,18 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_login_id"
-            android:inputType="text"
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/login_id_hint" />
+            android:hint="@string/login_id_hint"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_login_pw"
+
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -67,15 +73,18 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_login_pw"
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/login_pw_hint"
+
             android:inputType="text|textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_login_signin"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -85,6 +94,7 @@
 
     <Button
         android:id="@+id/btn_login_signup"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

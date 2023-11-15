@@ -1,16 +1,20 @@
-package org.sopt.dosoptjaewon.presentation.main.home
+package org.sopt.dosoptjaewon.presentation.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.sopt.dosoptjaewon.R
 import org.sopt.dosoptjaewon.data.model.User
-import org.sopt.dosoptjaewon.model.Friend
+import org.sopt.dosoptjaewon.domain.model.Friend
 import java.time.LocalDate
 
-class HomeViewModel : ViewModel() {
-    val _userInfo = MutableLiveData<User?>()
+class MainViewModel : ViewModel() {
+    private val _userInfo = MutableLiveData<User?>()
     val userInfo: MutableLiveData<User?>
         get() = _userInfo
+
+    private val _friendsList = MutableLiveData<List<Friend>>()
+    val friendsList: MutableLiveData<List<Friend>>
+        get() = _friendsList
 
     val mockFriendsInfo = MutableLiveData(
         listOf(
@@ -89,7 +93,16 @@ class HomeViewModel : ViewModel() {
             )
         )
     )
+
+    init {
+        setFriendsList(mockFriendsInfo.value!!)
+    }
+
     fun setUserInfo(user: User?) {
         _userInfo.value = user
+    }
+
+    fun setFriendsList(friends: List<Friend>) {
+        _friendsList.value = friends
     }
 }

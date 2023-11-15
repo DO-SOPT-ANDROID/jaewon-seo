@@ -1,4 +1,4 @@
-package org.sopt.dosoptjaewon.model
+package org.sopt.dosoptjaewon.domain.model
 
 import androidx.annotation.DrawableRes
 import java.time.LocalDate

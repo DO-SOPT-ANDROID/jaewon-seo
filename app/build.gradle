@@ -39,6 +39,7 @@ android {
 dependencies {
     //:core:common 의존성 추가
     implementation project(':core:common')
+    implementation project(':core:designsystem')
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

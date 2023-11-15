@@ -35,7 +35,7 @@ class UserAdapter(context: Context) : RecyclerView.Adapter<UserAdapter.UserViewH
         fun onBind(userInfo: User) {
             binding.tvUserName.text = userInfo.nickname
             binding.tvUserHobby.text = "제 취미는 : " + userInfo.hobby + "입니다."
-            binding.ivUserProfile.load(R.drawable.ic_profile)  {
+            binding.ivUserProfile.load(R.drawable.ic_profile) {
                 transformations(CircleCropTransformation())
             }
         }
