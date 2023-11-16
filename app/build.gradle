@@ -5,6 +5,9 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.20-RC'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'org.sopt.dosoptjaewon'
     compileSdk 34
@@ -17,6 +20,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "DO_SOPT_BASE_URL", properties["do.sopt.base.url"]
     }
 
     buildTypes {
@@ -34,6 +38,10 @@ android {
     }
     viewBinding {
         enabled = true
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 }
 
@@ -76,6 +84,5 @@ dependencies {
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
-
 
 }
