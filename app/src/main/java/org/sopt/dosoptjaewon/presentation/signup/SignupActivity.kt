@@ -12,15 +12,15 @@ import com.sopt.common.viewmodel.UniversalViewModelFactory
 import org.sopt.dosoptjaewon.R.string
 import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.data.network.repository.signup.SignupRepository
-import org.sopt.dosoptjaewon.data.network.service.ServicePool.signupService
+import org.sopt.dosoptjaewon.data.network.ServicePool.authService
 import org.sopt.dosoptjaewon.databinding.ActivitySignupBinding
 import org.sopt.dosoptjaewon.presentation.login.LoginActivity
 
 class SignupActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignupBinding.inflate(layoutInflater) }
-    private val viewModel: SignupViewModel by viewModels {
+    private val signupViewModel: SignupViewModel by viewModels {
         UniversalViewModelFactory {
-            SignupViewModel(SignupRepository(signupService))
+            SignupViewModel(SignupRepository(authService))
         }
     }
 
@@ -28,7 +28,7 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupViewListeners()
-        setupViewModelObservers()
+        setupSignupStateObserver()
     }
 
     private fun setupViewListeners() {
@@ -37,8 +37,8 @@ class SignupActivity : AppCompatActivity() {
 
     private fun createUserAndSignup() {
         val user = createUserFromInput()
-        if (viewModel.signupValidCheck(user)) {
-            viewModel.handleSignup(user)
+        if (signupViewModel.signupValidCheck(user)) {
+            signupViewModel.handleSignup(user)
         } else {
             toast(getString(string.signup_check_format))
         }
@@ -53,8 +53,8 @@ class SignupActivity : AppCompatActivity() {
         )
     }
 
-    private fun setupViewModelObservers() {
-        viewModel.signupState.observe(this) { state ->
+    private fun setupSignupStateObserver() {
+        signupViewModel.signupState.observe(this) { state ->
             when (state) {
                 is SignupState.Success -> {
                     toast(getString(string.signup_success))
