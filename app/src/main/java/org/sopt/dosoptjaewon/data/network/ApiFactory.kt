@@ -1,4 +1,4 @@
-package org.sopt.dosoptjaewon.data.network.service
+package org.sopt.dosoptjaewon.data.network
 
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -8,6 +8,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.sopt.dosoptjaewon.BuildConfig
+import org.sopt.dosoptjaewon.data.network.service.AuthService
 import retrofit2.Retrofit
 
 object ApiFactory {
@@ -37,5 +38,5 @@ object ApiFactory {
 }
 
 object ServicePool {
-    val signupService = ApiFactory.create<SignupService>()
+    val authService = ApiFactory.create<AuthService>()
 }

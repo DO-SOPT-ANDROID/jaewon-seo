@@ -1,13 +1,17 @@
 package org.sopt.dosoptjaewon.presentation.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import org.sopt.dosoptjaewon.R
 import org.sopt.dosoptjaewon.data.model.User
+import org.sopt.dosoptjaewon.data.network.repository.main.MainRepository
 import org.sopt.dosoptjaewon.domain.model.Friend
 import java.time.LocalDate
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
     private val _userInfo = MutableLiveData<User?>()
     val userInfo: MutableLiveData<User?>
         get() = _userInfo
@@ -98,11 +102,19 @@ class MainViewModel : ViewModel() {
         setFriendsList(mockFriendsInfo.value!!)
     }
 
-    fun setUserInfo(user: User?) {
-        _userInfo.value = user
+    private fun setFriendsList(friends: List<Friend>) {
+        _friendsList.value = friends
     }
 
-    fun setFriendsList(friends: List<Friend>) {
-        _friendsList.value = friends
+    fun getUserInfo(memberId: Int) {
+        viewModelScope.launch {
+            runCatching {
+                mainRepository.getUserInfo(memberId)
+            }.onSuccess {
+                _userInfo.value = User(it.id, "", it.nickname, "")
+            }.onFailure {
+                Log.d("MainViewModel", "getUserInfoError: ${it.message}")
+            }
+        }
     }
 }

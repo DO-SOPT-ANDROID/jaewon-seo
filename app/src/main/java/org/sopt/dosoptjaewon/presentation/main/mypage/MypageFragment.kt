@@ -14,7 +14,6 @@ import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.databinding.FragmentMypageBinding
 import org.sopt.dosoptjaewon.presentation.login.LoginActivity
 import org.sopt.dosoptjaewon.presentation.login.LoginActivity.Companion.PREF_FILE_USER
-import org.sopt.dosoptjaewon.presentation.main.MainActivity
 import org.sopt.dosoptjaewon.presentation.main.MainViewModel
 
 class MypageFragment : Fragment() {
@@ -41,7 +40,7 @@ class MypageFragment : Fragment() {
         binding.apply {
             tvMypageNickname.text = user?.nickname
             tvMypageIdValue.text = user?.id
-            tvMypageHobbyValue.text = user?.hobby
+            tvMypageComment.text = getString(R.string.mypage_comment).format(user?.nickname)
             ivMypageProfile.load(R.drawable.ic_profile)
         }
     }
@@ -64,10 +63,8 @@ class MypageFragment : Fragment() {
     private fun clearUserPreferences() {
         requireActivity().getSharedPreferences(PREF_FILE_USER, AppCompatActivity.MODE_PRIVATE)
             .edit().apply {
-                remove(MainActivity.PREF_KEY_USER_ID)
-                remove(MainActivity.PREF_KEY_USER_PW)
-                remove(MainActivity.PREF_KEY_USER_NICKNAME)
-                remove(MainActivity.PREF_KEY_USER_HOBBY)
+                remove(LoginActivity.PREF_KEY_USER_ID)
+                remove(LoginActivity.PREF_KEY_USER_PW)
                 apply()
             }
     }
