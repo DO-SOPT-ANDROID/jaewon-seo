@@ -13,6 +13,7 @@
     <string name="signup_do_signup">회원가입 하기</string>
     <string name="signup_fail">회원가입에 실패했습니다.</string>
     <string name="signup_success">회원가입에 성공했습니다.</string>
+    <string name="signup_check_format">ID PW 조건을 다시 확인해주세요</string>
 
     <!-- login -->
     <string name="login_title">Welcome to DO SOPT!</string>

@@ -11,4 +11,3 @@ class UniversalViewModelFactory<T>(val creator: () -> T) :
         return creator() as T
     }
 }
-
