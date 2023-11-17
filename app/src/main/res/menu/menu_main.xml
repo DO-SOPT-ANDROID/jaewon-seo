@@ -11,6 +11,11 @@
         android:title="홈" />
 
     <item
+        android:id="@+id/reqres"
+        android:icon="@drawable/ic_reqres"
+        android:title="REQRES" />
+
+    <item
         android:id="@+id/menu_main_mypage"
         android:icon="@drawable/ic_mypage"
         android:title="마이페이지" />
