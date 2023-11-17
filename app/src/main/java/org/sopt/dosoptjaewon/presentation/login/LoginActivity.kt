@@ -83,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 is LoginState.Failure -> {
-                    toast(state.message)
+                    toast(getString(R.string.login_fail))
                 }
 
                 else -> {}

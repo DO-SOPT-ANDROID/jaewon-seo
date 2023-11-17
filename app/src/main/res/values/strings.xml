@@ -23,7 +23,7 @@
     <string name="login_pw_hint">pw를 입력하세요</string>
     <string name="login_button_signin">로그인</string>
     <string name="login_button_signup">회원가입</string>
-    <string name="login_fail">로그인에 실패했습니다.</string>
+    <string name="login_fail">아이디와 비밀번호를 다시 확인해주세요.</string>
     <string name="login_success">로그인에 성공했습니다.</string>
     <string name="login_auto_login">자동 로그인</string>
 

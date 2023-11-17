@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.sopt.common.context.toast
 import org.sopt.dosoptjaewon.databinding.FragmentReqresBinding
 import org.sopt.dosoptjaewon.presentation.main.reqres.adapter.FollowerAdapter
 
@@ -47,6 +48,7 @@ class ReqresFragment : Fragment() {
                 }
 
                 is ReqresState.Failure -> {
+                    context?.toast(state.message)
                 }
 
                 else -> {}
