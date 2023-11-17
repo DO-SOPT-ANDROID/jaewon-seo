@@ -82,6 +82,19 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <CheckBox
+        android:id="@+id/cb_login_auto_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:buttonTint="@color/pophory_purple"
+        android:checked="false"
+        android:clickable="true"
+        android:text="@string/login_auto_login"
+        app:layout_constraintStart_toStartOf="@id/il_login_pw"
+        app:layout_constraintTop_toBottomOf="@id/il_login_pw" />
+
+
     <Button
         android:id="@+id/btn_login_signin"
         style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
@@ -90,7 +103,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/login_button_signin"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/il_login_pw" />
+        app:layout_constraintTop_toBottomOf="@id/cb_login_auto_login" />
 
     <Button
         android:id="@+id/btn_login_signup"
