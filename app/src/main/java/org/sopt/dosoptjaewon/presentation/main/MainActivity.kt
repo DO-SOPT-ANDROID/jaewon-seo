@@ -15,6 +15,7 @@ import org.sopt.dosoptjaewon.databinding.ActivityMainBinding
 import org.sopt.dosoptjaewon.presentation.main.doandroid.DoAndroidFragment
 import org.sopt.dosoptjaewon.presentation.main.home.HomeFragment
 import org.sopt.dosoptjaewon.presentation.main.mypage.MypageFragment
+import org.sopt.dosoptjaewon.presentation.main.reqres.ReqresFragment
 import kotlin.system.exitProcess
 
 
@@ -84,6 +85,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_main_do_android -> DoAndroidFragment()
             R.id.menu_main_home -> HomeFragment()
             R.id.menu_main_mypage -> MypageFragment()
+            R.id.menu_main_reqres -> ReqresFragment()
             else -> null
         }
     }
