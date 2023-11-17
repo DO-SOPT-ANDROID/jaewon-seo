@@ -27,12 +27,12 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
         viewModelScope.launch {
             runCatching {
                 signupRepository.signup(SignupRequest(user.id, user.pw, user.nickname))
-            }.onSuccess { processResponse(it, user) }
+            }.onSuccess { processSuccess(it, user) }
                 .onFailure { processFailure(it) }
         }
     }
 
-    private fun processResponse(response: Response<Unit>, user: User) {
+    private fun processSuccess(response: Response<Unit>, user: User) {
         if (response.isSuccessful) {
             signupState.value = SignupState.Success(user)
         } else {
