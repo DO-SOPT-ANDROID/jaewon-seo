@@ -19,8 +19,8 @@
         tools:src="@drawable/ic_profile" />
 
     <TextView
-        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
         android:id="@+id/tv_user_name"
+        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -31,14 +31,14 @@
         tools:text="서재원" />
 
     <TextView
+        android:id="@+id/tv_user_comment"
         style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
-        android:id="@+id/tv_user_hobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
+        android:text="@string/item_user_hello"
         app:layout_constraintBottom_toBottomOf="@id/iv_user_profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_user_profile"
-        tools:text="제 취미는 000입니다." />
+        app:layout_constraintTop_toTopOf="@id/iv_user_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

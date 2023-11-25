@@ -8,21 +8,27 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.common.context.hideKeyboard
 import com.sopt.common.context.toast
-import com.sopt.common.view.snackBar
+import com.sopt.common.viewmodel.UniversalViewModelFactory
 import org.sopt.dosoptjaewon.R.string
 import org.sopt.dosoptjaewon.data.model.User
+import org.sopt.dosoptjaewon.data.network.repository.signup.SignupRepository
+import org.sopt.dosoptjaewon.data.network.ServicePool.authService
 import org.sopt.dosoptjaewon.databinding.ActivitySignupBinding
 import org.sopt.dosoptjaewon.presentation.login.LoginActivity
 
 class SignupActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignupBinding.inflate(layoutInflater) }
-    private val viewModel: SignupViewModel by viewModels()
+    private val signupViewModel: SignupViewModel by viewModels {
+        UniversalViewModelFactory {
+            SignupViewModel(SignupRepository(authService))
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupViewListeners()
-        setupViewModelObservers()
+        setupSignupStateObserver()
     }
 
     private fun setupViewListeners() {
@@ -31,7 +37,11 @@ class SignupActivity : AppCompatActivity() {
 
     private fun createUserAndSignup() {
         val user = createUserFromInput()
-        viewModel.handleSignup(user)
+        if (signupViewModel.signupValidCheck(user)) {
+            signupViewModel.handleSignup(user)
+        } else {
+            toast(getString(string.signup_check_format))
+        }
     }
 
     private fun createUserFromInput(): User {
@@ -43,16 +53,18 @@ class SignupActivity : AppCompatActivity() {
         )
     }
 
-    private fun setupViewModelObservers() {
-        viewModel.signupState.observe(this) { state ->
+    private fun setupSignupStateObserver() {
+        signupViewModel.signupState.observe(this) { state ->
             when (state) {
                 is SignupState.Success -> {
                     toast(getString(string.signup_success))
                     navigateToLoginActivity(state.user)
                 }
+
                 is SignupState.Failure -> {
-                    binding.root.snackBar(string.signup_fail)
+                    toast(state.message)
                 }
+
                 else -> {}
             }
         }
@@ -77,4 +89,5 @@ class SignupActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_USER = "EXTRA_USER"
     }
+
 }

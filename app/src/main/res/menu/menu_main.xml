@@ -8,10 +8,15 @@
     <item
         android:id="@+id/menu_main_home"
         android:icon="@drawable/ic_home"
-        android:title="홈" />
+        android:title="Home" />
+
+    <item
+        android:id="@+id/menu_main_reqres"
+        android:icon="@drawable/ic_reqres"
+        android:title="REQRES" />
 
     <item
         android:id="@+id/menu_main_mypage"
         android:icon="@drawable/ic_mypage"
-        android:title="마이페이지" />
+        android:title="MyPage" />
 </menu>

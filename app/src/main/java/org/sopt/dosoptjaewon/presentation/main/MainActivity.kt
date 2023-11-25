@@ -7,42 +7,44 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.sopt.common.context.toast
 import com.sopt.common.view.snackBar
+import com.sopt.common.viewmodel.UniversalViewModelFactory
 import org.sopt.dosoptjaewon.R
-import org.sopt.dosoptjaewon.data.model.User
+import org.sopt.dosoptjaewon.data.network.ServicePool.authService
+import org.sopt.dosoptjaewon.data.network.repository.main.MainRepository
 import org.sopt.dosoptjaewon.databinding.ActivityMainBinding
-import org.sopt.dosoptjaewon.presentation.login.LoginActivity.Companion.PREF_FILE_USER
 import org.sopt.dosoptjaewon.presentation.main.doandroid.DoAndroidFragment
 import org.sopt.dosoptjaewon.presentation.main.home.HomeFragment
 import org.sopt.dosoptjaewon.presentation.main.mypage.MypageFragment
+import org.sopt.dosoptjaewon.presentation.main.reqres.ReqresFragment
 import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val mainViewModel: MainViewModel by viewModels()
     private var backPressedTime: Long = 0L
+
+    private val mainViewModel: MainViewModel by viewModels {
+        UniversalViewModelFactory {
+            MainViewModel(MainRepository(authService))
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupViewModel()
         setupNavigation()
         setupBackPressedHandler()
 
         if (savedInstanceState == null) {
             setupDefaultFragment()
             setupDefaultBottomNavigation()
+            setupUerInfo()
         }
     }
 
-    private fun setupViewModel() {
-        val user = getUserInfo()
-        if (user != null) {
-            mainViewModel.setUserInfo(user)
-        } else {
-            showUserInfoLoadError()
-        }
+    private fun setupUerInfo() {
+        mainViewModel.getUserInfo(intent.getIntExtra(EXTRA_MEMBER_ID, 0))
     }
 
     private fun showUserInfoLoadError() {
@@ -83,6 +85,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_main_do_android -> DoAndroidFragment()
             R.id.menu_main_home -> HomeFragment()
             R.id.menu_main_mypage -> MypageFragment()
+            R.id.menu_main_reqres -> ReqresFragment()
             else -> null
         }
     }
@@ -127,26 +130,8 @@ class MainActivity : AppCompatActivity() {
         exitProcess(0)
     }
 
-    private fun getUserInfo(): User? {
-        val sharedPref = getSharedPreferences(PREF_FILE_USER, MODE_PRIVATE)
-        return with(sharedPref) {
-            val userId = getString(PREF_KEY_USER_ID, null)
-            val userPw = getString(PREF_KEY_USER_PW, null)
-            val userNickname = getString(PREF_KEY_USER_NICKNAME, null)
-            val userHobby = getString(PREF_KEY_USER_HOBBY, null)
-            if (userId != null && userPw != null && userNickname != null && userHobby != null) {
-                User(userId, userPw, userNickname, userHobby)
-            } else {
-                null
-            }
-        }
-    }
-
     companion object {
         private const val BACK_PRESS_INTERVAL = 2000 // 2초
-        const val PREF_KEY_USER_ID = "PREF_KEY_USER_ID"
-        const val PREF_KEY_USER_PW = "PREF_KEY_USER_PW"
-        const val PREF_KEY_USER_NICKNAME = "PREF_KEY_USER_NICKNAME"
-        const val PREF_KEY_USER_HOBBY = "PREF_KEY_USER_HOBBY"
+        private const val EXTRA_MEMBER_ID = "EXTRA_MEMBER_ID"
     }
 }
