@@ -51,7 +51,9 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
 
     fun signupValidCheck(user: User): Boolean {
         return user.id.length in MIN_ID_LENGTH..MAX_ID_LENGTH &&
+                user.id.matches(idRegex) &&
                 user.pw.length in MIN_PW_LENGTH..MAX_PW_LENGTH &&
+                user.pw.matches(passwordRegex) &&
                 user.nickname.isNotBlank() && user.nickname.matches(nicknameRegex) &&
                 user.hobby.isNotBlank() && user.hobby.matches(hobbyRegex)
     }
@@ -59,13 +61,20 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
     companion object {
         private const val MIN_ID_LENGTH = 6
         private const val MAX_ID_LENGTH = 10
-        private const val MIN_PW_LENGTH = 8
+        private const val MIN_PW_LENGTH = 6
         private const val MAX_PW_LENGTH = 12
         private const val NICKNAME_PATTERN = "^[a-zA-Z0-9가-힣]*$"
         private const val HOBBY_PATTERN = "^[a-zA-Z0-9가-힣]*$"
+        private const val DEFAULT_ERROR_MESSAGE = "회원가입에 실패하였습니다."
+
+        private const val ID_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$"
+        private const val PASSWORD_PATTERN =
+            "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]+$"
+
+        val idRegex = Regex(ID_PATTERN)
+        val passwordRegex = Regex(PASSWORD_PATTERN)
         val nicknameRegex = Regex(NICKNAME_PATTERN)
         val hobbyRegex = Regex(HOBBY_PATTERN)
-
-        private const val DEFAULT_ERROR_MESSAGE = "회원가입에 실패하였습니다."
     }
+
 }
