@@ -6,6 +6,6 @@ import retrofit2.Response
 
 class SignupRepository(private val authService: AuthService) {
     suspend fun signup(request: SignupRequest): Response<Unit> {
-        return authService.signup(request)
+        return authService.postSignup(request)
     }
 }
