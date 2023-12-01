@@ -1,5 +1,7 @@
 package org.sopt.dosoptjaewon.presentation.signup
 
+import android.util.Log
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,18 +19,51 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
 
     val signupState = MutableLiveData<SignupState>(SignupState.Idle)
 
-    fun handleSignup(user: User) {
+    val userId = MutableLiveData<String>()
+    val userPw = MutableLiveData<String>()
+    val userNickname = MutableLiveData<String>()
+    val userHobby = MutableLiveData<String>()
+
+    val isSignupEnable = MediatorLiveData<Boolean>().apply {
+        addSource(userId) {
+            validateForm()
+            Log.e("isSignupEnable", "hi")
+        }
+        addSource(userPw) { validateForm() }
+        addSource(userNickname) { validateForm() }
+        addSource(userHobby) { validateForm() }
+    }
+
+    private fun validateForm() {
+        val user = User(
+            userId.value ?: "",
+            userPw.value ?: "",
+            userNickname.value ?: "",
+            userHobby.value ?: ""
+        )
+        isSignupEnable.value = signupValidCheck(user)
+        Log.e("isSignupEnable", isSignupEnable.value.toString())
+    }
+
+
+    fun postSignup() {
         viewModelScope.launch {
             runCatching {
-                signupRepository.signup(SignupRequest(user.id, user.pw, user.nickname))
-            }.onSuccess { processSuccess(it, user) }
+                signupRepository.signup(
+                    SignupRequest(
+                        userId.value!!,
+                        userPw.value!!,
+                        userNickname.value!!
+                    )
+                )
+            }.onSuccess { processSuccess(it) }
                 .onFailure { processFailure(it) }
         }
     }
 
-    private fun processSuccess(response: Response<Unit>, user: User) {
+    private fun processSuccess(response: Response<Unit>) {
         if (response.isSuccessful) {
-            signupState.value = SignupState.Success(user)
+            signupState.value = userId.value?.let { SignupState.Success(it) }
         } else {
             val errorMessage =
                 extractErrorMessage(response.errorBody()?.string()) ?: DEFAULT_ERROR_MESSAGE
@@ -49,7 +84,7 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
         }
     }
 
-    fun signupValidCheck(user: User): Boolean {
+    private fun signupValidCheck(user: User): Boolean {
         return user.id.length in MIN_ID_LENGTH..MAX_ID_LENGTH &&
                 user.id.matches(idRegex) &&
                 user.pw.length in MIN_PW_LENGTH..MAX_PW_LENGTH &&
