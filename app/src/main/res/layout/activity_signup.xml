@@ -60,6 +60,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:error="@{signupViewModel.idError}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_login_id">
@@ -68,9 +69,9 @@
                         android:id="@+id/et_signup_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={signupViewModel.userId}"
                         android:hint="@string/signup_id_hint"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:text="@={signupViewModel.userId}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,6 +91,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:error="@{signupViewModel.passwordError}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_signup_pw">
@@ -98,9 +100,9 @@
                         android:id="@+id/et_signup_pw"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={signupViewModel.userPw}"
                         android:hint="@string/signup_hint"
-                        android:inputType="text|textPassword" />
+                        android:inputType="text|textPassword"
+                        android:text="@={signupViewModel.userPw}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,10 +130,10 @@
                         android:id="@+id/et_signup_nickname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={signupViewModel.userNickname}"
                         android:hint="@string/signup_nickname_hint"
                         android:imeOptions="actionNext"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:text="@={signupViewModel.userNickname}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,10 +161,10 @@
                         android:id="@+id/et_signup_hobby"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={signupViewModel.userHobby}"
                         android:hint="@string/signup_hobby_hint"
                         android:imeOptions="actionDone"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:text="@={signupViewModel.userHobby}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

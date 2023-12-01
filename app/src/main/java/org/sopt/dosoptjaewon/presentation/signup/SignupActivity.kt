@@ -2,7 +2,6 @@ package org.sopt.dosoptjaewon.presentation.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
@@ -11,7 +10,6 @@ import com.sopt.common.context.hideKeyboard
 import com.sopt.common.context.toast
 import com.sopt.common.viewmodel.UniversalViewModelFactory
 import org.sopt.dosoptjaewon.R.string
-import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.data.network.ServicePool.authService
 import org.sopt.dosoptjaewon.data.network.repository.signup.SignupRepository
 import org.sopt.dosoptjaewon.databinding.ActivitySignupBinding
@@ -48,7 +46,7 @@ class SignupActivity : AppCompatActivity() {
             when (state) {
                 is SignupState.Success -> {
                     toast(getString(string.signup_success))
-                    // navigateToLoginActivity(state.user)
+                    navigateToLoginActivity()
                 }
 
                 is SignupState.Failure -> {
@@ -60,16 +58,11 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToLoginActivity(user: User) {
-        val intent = createLoginIntentWithUser(user)
+    private fun navigateToLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
         setResult(RESULT_OK, intent)
         finish()
     }
-
-    private fun createLoginIntentWithUser(user: User): Intent =
-        Intent(this, LoginActivity::class.java).apply {
-            putExtra(EXTRA_USER, user)
-        }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         hideKeyboard(currentFocus ?: View(this))

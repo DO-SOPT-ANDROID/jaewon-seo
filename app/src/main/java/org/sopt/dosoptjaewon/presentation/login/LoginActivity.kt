@@ -4,14 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.common.context.hideKeyboard
 import com.sopt.common.context.toast
 import com.sopt.common.viewmodel.UniversalViewModelFactory
 import org.sopt.dosoptjaewon.R
-import org.sopt.dosoptjaewon.data.model.User
 import org.sopt.dosoptjaewon.data.network.ServicePool.authService
 import org.sopt.dosoptjaewon.data.network.repository.login.LoginRepository
 import org.sopt.dosoptjaewon.databinding.ActivityLoginBinding
@@ -26,14 +24,6 @@ class LoginActivity : AppCompatActivity() {
             LoginViewModel(LoginRepository(authService))
         }
     }
-    private val signupResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                result.data?.getParcelableExtra<User>(EXTRA_USER)?.let { user ->
-                    binding.etLoginId.setText(user.id)
-                }
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,7 +101,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToSignup() {
-        signupResultLauncher.launch(Intent(this, SignupActivity::class.java))
+        Intent(this, SignupActivity::class.java).also { intent ->
+            startActivity(intent)
+        }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
