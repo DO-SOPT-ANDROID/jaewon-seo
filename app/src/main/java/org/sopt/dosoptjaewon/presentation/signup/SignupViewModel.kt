@@ -1,6 +1,5 @@
 package org.sopt.dosoptjaewon.presentation.signup
 
-import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,17 +23,44 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
     val userNickname = MutableLiveData<String>()
     val userHobby = MutableLiveData<String>()
 
-    val isSignupEnable = MediatorLiveData<Boolean>().apply {
-        addSource(userId) {
-            validateForm()
-            Log.e("isSignupEnable", "hi")
-        }
-        addSource(userPw) { validateForm() }
-        addSource(userNickname) { validateForm() }
-        addSource(userHobby) { validateForm() }
+    val idError = MediatorLiveData<String?>().apply {
+        addSource(userId) { validateId() }
     }
 
-    private fun validateForm() {
+    val passwordError = MediatorLiveData<String?>().apply {
+        addSource(userPw) { validatePassword() }
+    }
+
+    val isSignupEnable = MediatorLiveData<Boolean>().apply {
+        addSource(userId) { signUpVaildForm() }
+        addSource(userPw) { signUpVaildForm() }
+        addSource(userNickname) { signUpVaildForm() }
+        addSource(userHobby) { signUpVaildForm() }
+    }
+
+    private fun validateId() {
+        idError.value =
+            if (userId.value.isNullOrEmpty() || (userId.value!!.matches(idRegex) &&
+                        userId.value!!.length in MIN_ID_LENGTH..MAX_ID_LENGTH)
+            ) {
+                null
+            } else {
+                ID_CONDITION_MESSAGE
+            }
+    }
+
+    private fun validatePassword() {
+        passwordError.value =
+            if (userPw.value.isNullOrEmpty() || (userPw.value!!.matches(passwordRegex) &&
+                        userPw.value!!.length in MIN_PW_LENGTH..MAX_PW_LENGTH)
+            ) {
+                null
+            } else {
+                PASSWORD_CONDITION_MESSAGE
+            }
+    }
+
+    private fun signUpVaildForm() {
         val user = User(
             userId.value ?: "",
             userPw.value ?: "",
@@ -42,9 +68,7 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
             userHobby.value ?: ""
         )
         isSignupEnable.value = signupValidCheck(user)
-        Log.e("isSignupEnable", isSignupEnable.value.toString())
     }
-
 
     fun postSignup() {
         viewModelScope.launch {
@@ -105,6 +129,9 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
         private const val ID_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$"
         private const val PASSWORD_PATTERN =
             "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]+$"
+        private const val ID_CONDITION_MESSAGE = "아이디는 6자 이상 10자 이하 이며, 영문과 숫자를 포함해야 합니다."
+        private const val PASSWORD_CONDITION_MESSAGE =
+            "비밀번호는 6자 이상 12자 이하 이며, 숫자와 특수 문자를 포함해야 합니다."
 
         val idRegex = Regex(ID_PATTERN)
         val passwordRegex = Regex(PASSWORD_PATTERN)
