@@ -10,9 +10,8 @@ import com.sopt.common.context.hideKeyboard
 import com.sopt.common.context.toast
 import com.sopt.common.viewmodel.UniversalViewModelFactory
 import org.sopt.dosoptjaewon.R.string
-import org.sopt.dosoptjaewon.data.model.User
-import org.sopt.dosoptjaewon.data.network.repository.signup.SignupRepository
 import org.sopt.dosoptjaewon.data.network.ServicePool.authService
+import org.sopt.dosoptjaewon.data.network.repository.signup.SignupRepository
 import org.sopt.dosoptjaewon.databinding.ActivitySignupBinding
 import org.sopt.dosoptjaewon.presentation.login.LoginActivity
 
@@ -27,6 +26,9 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.lifecycleOwner = this
+        binding.signupViewModel = signupViewModel
+
         setupViewListeners()
         setupSignupStateObserver()
     }
@@ -36,21 +38,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun createUserAndSignup() {
-        val user = createUserFromInput()
-        if (signupViewModel.signupValidCheck(user)) {
-            signupViewModel.handleSignup(user)
-        } else {
-            toast(getString(string.signup_check_format))
-        }
-    }
-
-    private fun createUserFromInput(): User {
-        return User(
-            id = binding.etSignupId.text.toString(),
-            pw = binding.etSignupPw.text.toString(),
-            nickname = binding.etSignupNickname.text.toString(),
-            hobby = binding.etSignupHobby.text.toString()
-        )
+        signupViewModel.postSignup()
     }
 
     private fun setupSignupStateObserver() {
@@ -58,7 +46,7 @@ class SignupActivity : AppCompatActivity() {
             when (state) {
                 is SignupState.Success -> {
                     toast(getString(string.signup_success))
-                    navigateToLoginActivity(state.user)
+                    navigateToLoginActivity()
                 }
 
                 is SignupState.Failure -> {
@@ -70,16 +58,11 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToLoginActivity(user: User) {
-        val intent = createLoginIntentWithUser(user)
+    private fun navigateToLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
         setResult(RESULT_OK, intent)
         finish()
     }
-
-    private fun createLoginIntentWithUser(user: User): Intent =
-        Intent(this, LoginActivity::class.java).apply {
-            putExtra(EXTRA_USER, user)
-        }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         hideKeyboard(currentFocus ?: View(this))

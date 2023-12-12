@@ -6,6 +6,6 @@ import org.sopt.dosoptjaewon.data.network.service.AuthService
 
 class LoginRepository(private val authService: AuthService) {
     suspend fun login(request: LoginRequest): LoginResponse {
-        return authService.login(request)
+        return authService.postLogin(request)
     }
 }
