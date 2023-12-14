@@ -15,10 +15,11 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
     private val _userInfo = MutableLiveData<User?>()
     val userInfo: MutableLiveData<User?>
         get() = _userInfo
-
     private val _friendsList = MutableLiveData<List<Friend>>()
     val friendsList: MutableLiveData<List<Friend>>
         get() = _friendsList
+
+    val userProfile = R.drawable.ic_profile
 
     val mockFriendsInfo = MutableLiveData(
         listOf(

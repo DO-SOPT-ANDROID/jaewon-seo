@@ -1,100 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.main.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_mypage_title"
-        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:contentDescription="login title"
-        android:text="@string/mypage_title"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <Button
-        android:id="@+id/btn_mypage_logout"
-        style="@style/TextAppearance.DoSoptJaewon.HeadLineMedium"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:padding="1dp"
-        android:text="@string/mypage_logout"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_mypage_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_mypage_title" />
+        <variable
+            name="mainViewModel"
+            type="org.sopt.dosoptjaewon.presentation.main.MainViewModel" />
 
-    <ImageView
-        android:id="@+id/iv_mypage_profile"
-        android:layout_width="80dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_profile"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_mypage_title"
-        tools:src="@drawable/ic_profile" />
+    </data>
 
-    <TextView
-        android:id="@+id/tv_mypage_nickname"
-        style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
-        app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
-        app:layout_constraintTop_toTopOf="@id/iv_mypage_profile"
-        tools:text="서재원" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.main.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_mypage_comment"
-        style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="20dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="@string/mypage_comment"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_mypage_nickname"
-        app:layout_constraintTop_toTopOf="@id/iv_mypage_profile" />
+        <TextView
+            android:id="@+id/tv_mypage_title"
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:contentDescription="login title"
+            android:text="@string/mypage_title"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_mypage_id_title"
-        style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/mypage_id"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/iv_mypage_profile"
-        app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
+        <Button
+            android:id="@+id/btn_mypage_logout"
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineMedium"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:padding="1dp"
+            android:text="@string/mypage_logout"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_mypage_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_mypage_title" />
 
-    <TextView
-        android:id="@+id/tv_mypage_id_value"
-        style="@style/TextAppearance.DoSoptJaewon.HeadLineMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@id/iv_mypage_profile"
-        app:layout_constraintTop_toBottomOf="@id/tv_mypage_id_title"
-        tools:text="librarywon" />
+        <ImageView
+            imageResource="@{mainViewModel.userProfile}"
+            android:id="@+id/iv_mypage_profile"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_profile"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_mypage_title"
+            tools:src="@drawable/ic_profile" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_mypage_nickname"
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
+            app:layout_constraintStart_toEndOf="@id/iv_mypage_profile"
+            app:layout_constraintTop_toTopOf="@id/iv_mypage_profile"
+            tools:text="서재원" />
+
+        <TextView
+            android:id="@+id/tv_mypage_comment"
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/mypage_comment"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mypage_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_mypage_nickname"
+            app:layout_constraintTop_toTopOf="@id/iv_mypage_profile" />
+
+        <TextView
+            android:id="@+id/tv_mypage_id_title"
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/mypage_id"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/iv_mypage_profile"
+            app:layout_constraintTop_toBottomOf="@id/iv_mypage_profile" />
+
+        <TextView
+            android:id="@+id/tv_mypage_id_value"
+            style="@style/TextAppearance.DoSoptJaewon.HeadLineMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/iv_mypage_profile"
+            app:layout_constraintTop_toBottomOf="@id/tv_mypage_id_title"
+            tools:text="librarywon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
