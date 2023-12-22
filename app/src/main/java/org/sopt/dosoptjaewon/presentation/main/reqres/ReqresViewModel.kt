@@ -3,6 +3,7 @@ package org.sopt.dosoptjaewon.presentation.main.reqres
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.dosoptjaewon.data.network.ServicePool.reqresService
 import org.sopt.dosoptjaewon.data.network.model.main.reqres.ReqresResponse
@@ -13,7 +14,7 @@ class ReqresViewModel : ViewModel() {
     val followers: MutableLiveData<List<Follower>>
         get() = _followers
 
-    val reqresState = MutableLiveData<ReqresState>(ReqresState.Idle)
+    val reqresState = MutableStateFlow<ReqresState>(ReqresState.Idle)
 
     init {
         loadFollowers()

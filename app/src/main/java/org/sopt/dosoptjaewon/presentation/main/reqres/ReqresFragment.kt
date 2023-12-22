@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sopt.common.context.toast
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.sopt.dosoptjaewon.databinding.FragmentReqresBinding
 import org.sopt.dosoptjaewon.presentation.main.reqres.adapter.FollowerAdapter
 
@@ -41,18 +45,20 @@ class ReqresFragment : Fragment() {
     }
 
     private fun setupReqresStateObserver() {
-        reqresViewModel.reqresState.observe(this) { state ->
-            when (state) {
-                is ReqresState.Success -> {
-                    reqresViewModel.followers.value?.let { followerAdapter.submitList(it) }
-                }
+        reqresViewModel.reqresState
+            .flowWithLifecycle(lifecycle)
+            .onEach { state ->
+                when (state) {
+                    is ReqresState.Success -> {
+                        reqresViewModel.followers.value?.let { followerAdapter.submitList(it) }
+                    }
 
-                is ReqresState.Failure -> {
-                    context?.toast(state.message)
-                }
+                    is ReqresState.Failure -> {
+                        context?.toast(state.message)
+                    }
 
-                else -> {}
-            }
-        }
+                    else -> {}
+                }
+            }.launchIn(lifecycleScope)
     }
 }
