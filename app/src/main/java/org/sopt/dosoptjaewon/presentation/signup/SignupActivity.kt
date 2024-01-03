@@ -6,9 +6,13 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.common.context.hideKeyboard
 import com.sopt.common.context.toast
 import com.sopt.common.viewmodel.UniversalViewModelFactory
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.sopt.dosoptjaewon.R.string
 import org.sopt.dosoptjaewon.data.network.ServicePool.authService
 import org.sopt.dosoptjaewon.data.network.repository.signup.SignupRepository
@@ -42,21 +46,24 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun setupSignupStateObserver() {
-        signupViewModel.signupState.observe(this) { state ->
-            when (state) {
-                is SignupState.Success -> {
-                    toast(getString(string.signup_success))
-                    navigateToLoginActivity()
-                }
+        signupViewModel.signupState
+            .flowWithLifecycle(lifecycle)
+            .onEach { state ->
+                when (state) {
+                    is SignupState.Success -> {
+                        toast(getString(string.signup_success))
+                        navigateToLoginActivity()
+                    }
 
-                is SignupState.Failure -> {
-                    toast(state.message)
-                }
+                    is SignupState.Failure -> {
+                        toast(state.message)
+                    }
 
-                else -> {}
-            }
-        }
+                    else -> {}
+                }
+            }.launchIn(lifecycleScope)
     }
+
 
     private fun navigateToLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)

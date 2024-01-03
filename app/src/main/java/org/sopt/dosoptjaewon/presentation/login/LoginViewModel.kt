@@ -1,15 +1,15 @@
 package org.sopt.dosoptjaewon.presentation.login
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.dosoptjaewon.data.network.model.login.LoginRequest
 import org.sopt.dosoptjaewon.data.network.model.login.LoginResponse
 import org.sopt.dosoptjaewon.data.network.repository.login.LoginRepository
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
-    val loginState = MutableLiveData<LoginState>(LoginState.Idle)
+    val loginState = MutableStateFlow<LoginState>(LoginState.Idle)
 
     fun handleLogin(id: String, pw: String) {
         viewModelScope.launch {

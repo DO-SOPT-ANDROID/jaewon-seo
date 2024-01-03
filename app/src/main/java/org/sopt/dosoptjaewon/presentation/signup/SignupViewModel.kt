@@ -4,6 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
@@ -16,7 +17,7 @@ import retrofit2.Response
 
 class SignupViewModel(private val signupRepository: SignupRepository) : ViewModel() {
 
-    val signupState = MutableLiveData<SignupState>(SignupState.Idle)
+    val signupState = MutableStateFlow<SignupState>(SignupState.Idle)
 
     val userId = MutableLiveData<String>()
     val userPw = MutableLiveData<String>()
@@ -87,7 +88,7 @@ class SignupViewModel(private val signupRepository: SignupRepository) : ViewMode
 
     private fun processSuccess(response: Response<Unit>) {
         if (response.isSuccessful) {
-            signupState.value = userId.value?.let { SignupState.Success(it) }
+            signupState.value = SignupState.Success(userId.value ?: "")
         } else {
             val errorMessage =
                 extractErrorMessage(response.errorBody()?.string()) ?: DEFAULT_ERROR_MESSAGE

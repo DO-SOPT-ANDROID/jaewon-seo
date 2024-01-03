@@ -6,15 +6,20 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.common.context.hideKeyboard
 import com.sopt.common.context.toast
 import com.sopt.common.viewmodel.UniversalViewModelFactory
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.sopt.dosoptjaewon.R
 import org.sopt.dosoptjaewon.data.network.ServicePool.authService
 import org.sopt.dosoptjaewon.data.network.repository.login.LoginRepository
 import org.sopt.dosoptjaewon.databinding.ActivityLoginBinding
 import org.sopt.dosoptjaewon.presentation.main.MainActivity
 import org.sopt.dosoptjaewon.presentation.signup.SignupActivity
+import org.sopt.dosoptjaewon.presentation.signup.SignupState
 
 class LoginActivity : AppCompatActivity() {
 
@@ -64,21 +69,23 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupLoginStateObserve() {
-        loginViewModel.loginState.observe(this) { state ->
-            when (state) {
-                is LoginState.Success -> {
-                    toast(getString(R.string.login_welcome_user).format(state.server_id))
-                    if (binding.cbLoginAutoLogin.isChecked) saveUserToPreferences()
-                    navigateToMainActivity(state.server_id)
-                }
+        loginViewModel.loginState
+            .flowWithLifecycle(lifecycle)
+            .onEach { state ->
+                when (state) {
+                    is LoginState.Success -> {
+                        toast(getString(R.string.login_welcome_user).format(state.server_id))
+                        if (binding.cbLoginAutoLogin.isChecked) saveUserToPreferences()
+                        navigateToMainActivity(state.server_id)
+                    }
 
-                is LoginState.Failure -> {
-                    toast(getString(R.string.login_fail))
-                }
+                    is LoginState.Failure -> {
+                        toast(getString(R.string.login_fail))
+                    }
 
-                else -> {}
-            }
-        }
+                    else -> {}
+                }
+            }.launchIn(lifecycleScope)
     }
 
     private fun navigateToMainActivity(serverUserId: Int) {
